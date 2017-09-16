@@ -4,5 +4,6 @@ Austin was here.
 
 John was here.
 
-Beth was here. Beth is awesome!
+Beth was here.
 
+Omar was here.
