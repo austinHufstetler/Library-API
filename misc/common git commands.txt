@@ -1,0 +1,7 @@
+git status //checks for all changes in your current branch compared to master that has yet to be committed
+git add (filename) //stages changes ready to be committed
+git commit -m "(message)" //commit the changes to your local branch
+git push origin (branch name) // pushed your current branch with all committed changes up to github
+git stash // stores all current uncommitted changes locally for ater use (good for when you need to swap branch quickly without saving changes)
+git checkout -b (branch name) // create a new branch from the branch you are currently on with a name you specifiy
+git pull origin (branch name) //pulls the most recent version of that branch
