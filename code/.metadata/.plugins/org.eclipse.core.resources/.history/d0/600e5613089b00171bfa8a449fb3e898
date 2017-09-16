@@ -1,0 +1,9 @@
+package users;
+
+public class Associate extends Employee {
+
+	public Associate(){
+		role = "associate";
+	}
+	
+}
