@@ -1,0 +1,10 @@
+package users;
+
+public abstract class User {
+
+	String firstName;
+	String lastName;
+	String role;
+	String username;
+	String password;
+}
