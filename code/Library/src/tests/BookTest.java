@@ -9,8 +9,6 @@ public class BookTest {
 		System.out.println(book.getAuthor() == "test");
 		System.out.println(book.getIsbn() == "test");
 		System.out.println(book.getTitle() == "test");
-		System.out.println("HI");
-		System.out.println("WORLD");
 	}
 
 }
