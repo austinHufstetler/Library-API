@@ -5,3 +5,5 @@ git push origin (branch name) // pushed your current branch with all committed c
 git stash // stores all current uncommitted changes locally for ater use (good for when you need to swap branch quickly without saving changes)
 git checkout -b (branch name) // create a new branch from the branch you are currently on with a name you specifiy
 git pull origin (branch name) //pulls the most recent version of that branch
+git branch // shows all branches 
+git branch -D (branchname) // Deletes the branch that is specified
