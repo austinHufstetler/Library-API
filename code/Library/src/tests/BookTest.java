@@ -1,6 +1,6 @@
 package tests;
 
-import books.Book;
+import Books.Book;
 
 public class BookTest {
 
