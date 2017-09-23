@@ -1,11 +1,15 @@
 package tests;
 
+<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 import books.Book;
+=======
+import Books.Book;
+>>>>>>> parent of c7c8403... added books to db
 
 public class BookTest {
 
