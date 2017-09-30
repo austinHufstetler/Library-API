@@ -8,6 +8,14 @@ public abstract class User{
 	String username;
 	String password;
 	
+	public User(String firstName, String lastName, String role, String username, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.role = role;
+		this.username = username;
+		this.password = password;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
