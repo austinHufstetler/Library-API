@@ -9,6 +9,8 @@ public class PIN_Code{
 	private static void generatePIN_Code() {
 		Random rand = new Random();
 		int pin = rand.nextInt(100000);
+		boolean exsist = true;
+		
 		if (){
 			
 		}
