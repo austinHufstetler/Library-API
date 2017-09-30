@@ -1,6 +1,7 @@
 package users;
+import common.*;
 
-public abstract class User{
+public abstract class User extends LibraryObject{
 
 	String firstName;
 	String lastName;
