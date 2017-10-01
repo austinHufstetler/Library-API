@@ -37,31 +37,29 @@ public class UserManagement {
 	
 	public static void updateMember(Member m, int id){
 		try{
-			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
-			//String pin = m.pin;
 			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
-			//Statement st = conn.createStatement();
 			String sql = "UPDATE Members SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
-			//st.executeQuery(sql);
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
 			st.setString(2, m.lastName);
 			st.setString(3, m.username);
 			st.setString(4, m.password); 
 			st.executeUpdate();
-			//st.executeUpdate(sql);
-			//st.executeQuery(sql);
-			//ResultSet rs = st.executeQuery(sql);
-			/*while(rs.next()){
-				System.out.println("\n" + rs.getString("Title"));
-			} */
 		} catch(Exception e){
 			System.out.print(e);
 		} 	
 	}
 	
-	public void deleteMember(Member m){
-
+	public static void deleteMember(String username){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			String sql = "DELETE FROM Members WHERE Username = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, username);
+			st.executeUpdate();
+		} catch(Exception e){
+			System.out.print(e);
+		} 	
 	}
 	
 	////////////////////
@@ -87,12 +85,31 @@ public class UserManagement {
 		
 	}
 	
-	public void updateManager(Manager m){
-		
+	public static void updateManager(Manager m, int id){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			String sql = "UPDATE Employees SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, m.firstName);
+			st.setString(2, m.lastName);
+			st.setString(3, m.username);
+			st.setString(4, m.password); 
+			st.executeUpdate();
+		} catch(Exception e){
+			System.out.print(e);
+		} 			
 	}
 	
-	public void deleteManager(Manager m){
-		
+	public static void deleteManager(String username){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			String sql = "DELETE FROM Employees WHERE Username = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, username);
+			st.executeUpdate();
+		} catch(Exception e){
+			System.out.print(e);
+		} 			
 	}
 	
 	//////////////////////
@@ -118,12 +135,31 @@ public class UserManagement {
 		
 	}
 	
-	public static void updateAssociate(Associate m){
-		
+	public static void updateAssociate(Associate m, int id){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			String sql = "UPDATE Employees SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, m.firstName);
+			st.setString(2, m.lastName);
+			st.setString(3, m.username);
+			st.setString(4, m.password); 
+			st.executeUpdate();
+		} catch(Exception e){
+			System.out.print(e);
+		} 			
 	}
 	
-	public static void deleteAssociate(Associate m){
-		
+	public static void deleteAssociate(String username){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			String sql = "DELETE FROM Employees WHERE Username = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, username);
+			st.executeUpdate();
+		} catch(Exception e){
+			System.out.print(e);
+		} 			
 	}
 	
 }
