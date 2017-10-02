@@ -1,6 +1,7 @@
 package books;
+import common.*;
 
-public class Book {
+public class Book extends LibraryObject{
 	
 	String author;
 	String isbn;
