@@ -3,9 +3,6 @@ package users;
 import java.util.Random;
 
 public class Member extends User {
-	public Member(String firstName, String lastName, String role, String username, String password) {
-		super(firstName, lastName, role, username, password);
-public class Member extends User {
 	
 	String pin;
 	
