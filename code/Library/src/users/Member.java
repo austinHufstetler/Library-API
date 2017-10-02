@@ -1,10 +1,6 @@
 package users;
-
 import java.util.Random;
 
-public class Member extends User {
-	public Member(String firstName, String lastName, String role, String username, String password) {
-		super(firstName, lastName, role, username, password);
 public class Member extends User {
 	
 	String pin;
@@ -25,7 +21,7 @@ public class Member extends User {
 	}
 	
 	//actions methods
-	private static void checkoutBook(){
+	private void checkoutBook(){
 		
 	}
 	private String generatePINCode() {
@@ -34,23 +30,23 @@ public class Member extends User {
 		return "" + pin;
 	}
 	
-	private static void renewBook(){
+	private void renewBook(){
 		
 	}
 	
-	private static void reportLostBook(){
+	private void reportLostBook(){
 		
 	}
 	
-	private static void holdBook(){
+	private void holdBook(){
 		
 	}
 	
-	private static void displayCheckedOutBooks(){
+	private void displayCheckedOutBooks(){
 		
 	}
 	
-	private static void displayFines(){
+	private void displayFines(){
 		
 	}
 	
