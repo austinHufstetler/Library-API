@@ -31,7 +31,25 @@ public class UserManagement {
 		} 
 	}
 	
-	public void readMember(Member m){
+	
+	//changes return type to string later, void is for testing
+	public static String readMember(String username){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE Username = ?");    
+			st.setString(1, username);    
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			int id = rs.getInt("ID");
+			String fname = rs.getString("FName");
+			String lname= rs.getString("LName");
+			String uname = rs.getString("Username");
+			String password =  rs.getString("Password");
+			return String.format("ID= %d\nName= %s %s\nUsername= %s\nPassword= %s\n", id,fname,lname,uname,password);
+		    } catch(Exception e){
+		    	return "User doesn't exist";
+		    }
 		
 	}
 	
@@ -81,8 +99,23 @@ public class UserManagement {
 		} 	
 	}
 	
-	public static void readManager(Manager m){
-		
+	public static String readManager(String username){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ?");    
+			st.setString(1, username);    
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			int id = rs.getInt("ID");
+			String fname = rs.getString("FName");
+			String lname= rs.getString("LName");
+			String uname = rs.getString("Username");
+			String password =  rs.getString("Password");
+			return String.format("ID= %d\nName= %s %s\nUsername= %s\nPassword= %s\n", id,fname,lname,uname,password);
+		    } catch(Exception e){
+		    	return "User doesn't exist";
+		    }		
 	}
 	
 	public static void updateManager(Manager m, int id){
@@ -131,8 +164,23 @@ public class UserManagement {
 		} 			
 	}
 	
-	public static void readAssociate(Associate m){
-		
+	public static String readAssociate(String username){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ?");    
+			st.setString(1, username);    
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			int id = rs.getInt("ID");
+			String fname = rs.getString("FName");
+			String lname= rs.getString("LName");
+			String uname = rs.getString("Username");
+			String password =  rs.getString("Password");
+			return String.format("ID= %d\nName= %s %s\nUsername= %s\nPassword= %s\n", id,fname,lname,uname,password);
+		    } catch(Exception e){
+		    	return "User doesn't exist";
+		    }		
 	}
 	
 	public static void updateAssociate(Associate m, int id){
