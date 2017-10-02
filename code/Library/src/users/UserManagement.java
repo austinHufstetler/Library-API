@@ -210,4 +210,55 @@ public class UserManagement {
 		} 			
 	}
 	
+	public static boolean authorizeUser(String username, String password){
+		return authorizeEmployee(username,password) || authorizeMember(username, password);
+
+	}
+	
+	private static boolean authorizeEmployee(String username, String password){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ? AND Password = ?");    
+			st.setString(1, username);   
+			st.setString(2, password);   
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String uname = rs.getString("Username");
+			String pswd =  rs.getString("Password"); 
+			
+			if(uname.equals(username) && pswd.equals(password)){
+				return true;
+			}
+			else{
+				return false;
+			}
+		    } catch(Exception e){
+		    	return false;
+		    }	
+	}
+	
+	private static boolean authorizeMember(String username, String password){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE Username = ? AND Password = ?");    
+			st.setString(1, username);   
+			st.setString(2, password);   
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String uname = rs.getString("Username");
+			String pswd =  rs.getString("Password"); 
+			
+			if(uname.equals(username) && pswd.equals(password)){
+				return true;
+			}
+			else{
+				return false;
+			}
+		    } catch(Exception e){
+		    	return false;
+		    }	
+	}
+	
 }
