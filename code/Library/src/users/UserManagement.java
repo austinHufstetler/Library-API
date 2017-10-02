@@ -1,6 +1,7 @@
 package users;
 
 import java.sql.*;
+import java.util.Random;
 
 public class UserManagement {
 
@@ -260,5 +261,11 @@ public class UserManagement {
 		    	return false;
 		    }	
 	}
-	
+	private String DuplicateCheck(String value) {
+		boolean duplicated = true;
+		do{
+			   //myFunction();
+			}while(duplicated = true);
+	return value;
+	}
 }

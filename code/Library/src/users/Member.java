@@ -1,5 +1,10 @@
 package users;
 
+import java.util.Random;
+
+public class Member extends User {
+	public Member(String firstName, String lastName, String role, String username, String password) {
+		super(firstName, lastName, role, username, password);
 public class Member extends User {
 	
 	String pin;
@@ -22,6 +27,11 @@ public class Member extends User {
 	//actions methods
 	private static void checkoutBook(){
 		
+	}
+	private String generatePINCode() {
+		Random rand = new Random();
+		int pin = rand.nextInt(100000);
+		return "" + pin;
 	}
 	
 	private static void renewBook(){
@@ -49,5 +59,5 @@ public class Member extends User {
 	
 
 
-	
+
 }
