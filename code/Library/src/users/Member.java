@@ -1,5 +1,7 @@
 package users;
 
+import java.util.Random;
+
 public class Member extends User {
 	
 	String pin;
@@ -42,6 +44,12 @@ public class Member extends User {
 	
 	private static void displayFines(){
 		
+	}
+	
+	private String generatePINCode() {
+		Random rand = new Random();
+		int pin = rand.nextInt(100000);
+		return "" + pin;
 	}
 	
 	

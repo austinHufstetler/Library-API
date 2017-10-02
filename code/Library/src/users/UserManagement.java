@@ -261,4 +261,12 @@ public class UserManagement {
 		    }	
 	}
 	
+	private String duplicateCheck(String value) {
+		boolean duplicated = true;
+		do{
+			   //myFunction();
+			}while(duplicated = true);
+	return value;
+	}
+	
 }
