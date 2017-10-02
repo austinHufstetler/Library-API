@@ -25,11 +25,6 @@ public class Member extends User {
 	private static void checkoutBook(){
 		
 	}
-	private String generatePINCode() {
-		Random rand = new Random();
-		int pin = rand.nextInt(100000);
-		return "" + pin;
-	}
 	
 	private static void renewBook(){
 		
@@ -49,6 +44,12 @@ public class Member extends User {
 	
 	private static void displayFines(){
 		
+	}
+	
+	private String generatePINCode() {
+		Random rand = new Random();
+		int pin = rand.nextInt(100000);
+		return "" + pin;
 	}
 	
 	

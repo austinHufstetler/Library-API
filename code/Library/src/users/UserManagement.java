@@ -261,6 +261,7 @@ public class UserManagement {
 		    	return false;
 		    }	
 	}
+
 	private String DuplicateCheck(String value) {
 		boolean duplicated = true;
 		do{
@@ -268,4 +269,6 @@ public class UserManagement {
 			}while(duplicated = true);
 	return value;
 	}
+
+	
 }

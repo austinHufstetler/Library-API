@@ -14,7 +14,7 @@ public class UserTest {
 		//System.out.println(UserManagement.readMember("dpickle2"));
 		//System.out.println(UserManagement.readManager("kausten"));
 		//System.out.println(UserManagement.readAssociate("jblack2"));
-		System.out.println(UserManagement.authorizeUser("kausten", "password4567"));
+		System.out.println(UserManagement.authorizeUser("kausten", "password456"));
 	}
 
 }
