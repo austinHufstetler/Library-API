@@ -18,7 +18,8 @@ public class BookTest {
 
 		try{
 			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
-			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
+			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
 			Statement st = conn.createStatement();
 			String sql = "Select * from Books";
 			st.executeQuery(sql);

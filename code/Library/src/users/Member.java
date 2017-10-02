@@ -1,13 +1,53 @@
 package users;
 
 public class Member extends User {
-
-	public Member(String firstName, String lastName, String username, String password){
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.role = "member";
-		this.username = username;
-		this.password = password;
+	
+	String pin;
+	
+	public Member(String firstName, String lastName, String username, String password, String pin) {
+		super(firstName, lastName, "member", username, password);
+		// TODO Auto-generated constructor stub
+		this.pin = pin;
 	}
+
+	//getters and setters
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+	
+	//actions methods
+	private static void checkoutBook(){
+		
+	}
+	
+	private static void renewBook(){
+		
+	}
+	
+	private static void reportLostBook(){
+		
+	}
+	
+	private static void holdBook(){
+		
+	}
+	
+	private static void displayCheckedOutBooks(){
+		
+	}
+	
+	private static void displayFines(){
+		
+	}
+	
+	
+	
+	
+
+
 	
 }
