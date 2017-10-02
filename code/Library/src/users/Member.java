@@ -1,20 +1,16 @@
 package users;
 
-<<<<<<< HEAD
 import java.util.Random;
 
 public class Member extends User {
-	int pin;
 	public Member(String firstName, String lastName, String role, String username, String password) {
 		super(firstName, lastName, role, username, password);
-=======
 public class Member extends User {
 	
 	String pin;
 	
 	public Member(String firstName, String lastName, String username, String password, String pin) {
 		super(firstName, lastName, "member", username, password);
->>>>>>> master
 		// TODO Auto-generated constructor stub
 		this.pin = pin;
 	}
@@ -32,13 +28,11 @@ public class Member extends User {
 	private static void checkoutBook(){
 		
 	}
-<<<<<<< HEAD
 	private String generatePINCode() {
 		Random rand = new Random();
-		this.pin = rand.nextInt(100000);
+		int pin = rand.nextInt(100000);
 		return "" + pin;
 	}
-=======
 	
 	private static void renewBook(){
 		
@@ -65,6 +59,5 @@ public class Member extends User {
 	
 
 
-	
->>>>>>> master
+
 }

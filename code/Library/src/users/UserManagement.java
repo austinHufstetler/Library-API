@@ -264,7 +264,7 @@ public class UserManagement {
 	private String DuplicateCheck(String value) {
 		boolean duplicated = true;
 		do{
-			   myFunction();
+			   //myFunction();
 			}while(duplicated = true);
 	return value;
 	}
