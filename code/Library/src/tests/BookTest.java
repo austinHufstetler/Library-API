@@ -6,30 +6,18 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import books.Book;
-
+import books.*;
 
 public class BookTest {
 
 	public static void main(String[] args){
-	 /*	Book book = new Book("test","test","test");
-		System.out.println(book.getAuthor() == "test");
-		System.out.println(book.getIsbn() == "test");
-		System.out.println(book.getTitle() == "test"); */
-
-		try{
-			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
-			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
-			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/git/group1/Library_DB.accdb");
-			Statement st = conn.createStatement();
-			String sql = "Select * from Books";
-			st.executeQuery(sql);
-			ResultSet rs = st.executeQuery(sql);
-			while(rs.next()){
-				System.out.println("\n" + rs.getString("Title"));
-			}
-		} catch(Exception e){
-			System.out.print(e);
-		}
+		Book book = new Book("test","test","test","test","test","test","test");
+		BookManagement manager =  new BookManagement();
+		manager.add(book);
+		book.setId(9);
+		Book testBook = manager.search(book);
+		System.out.print(testBook.getIsbn() == "test");
+		manager.delete(book);
 	}
 
 }
