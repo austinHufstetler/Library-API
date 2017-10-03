@@ -1,0 +1,20 @@
+import java.util.Random;
+
+public class PIN_Code{
+    
+    public static void main (String[] args){
+         generatePIN_Code();
+    }
+
+	private static void generatePIN_Code() {
+		Random rand = new Random();
+		int pin = rand.nextInt(100000);
+		boolean exsist = true;
+		
+		if (){
+			
+		}
+		else
+			System.out.println(pin);
+	}
+}
