@@ -17,7 +17,6 @@ public class BookTest {
 		Book testBook = manager.search(book);
 		System.out.print(testBook.getIsbn() == "test");
 		manager.delete(book);
-		manager.search(book);
 	}
 
 }
