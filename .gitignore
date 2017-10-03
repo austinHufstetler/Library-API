@@ -1,3 +1,6 @@
+*.accdb
+*.laccdb
+
 # Compiled class file
 *.class
 
@@ -6,8 +9,7 @@
 
 # BlueJ files
 *.ctxt
-*.accdb
-*.laccdb
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
