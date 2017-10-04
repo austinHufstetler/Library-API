@@ -46,7 +46,7 @@ public class Member extends User {
 		
 	}
 	
-	private String generatePINCode() {
+	public static String generatePINCode() {
 		Random rand = new Random();
 		int pin = rand.nextInt(89999)+10000;
 		return "" + pin;
