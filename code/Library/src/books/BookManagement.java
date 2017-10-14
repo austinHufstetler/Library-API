@@ -63,7 +63,7 @@ public class BookManagement {
 	}
 	public Connection getConnection(){
 		try{
-			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/John/My Documents/cs 4321/group1/Library_DB.accdb");
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/gitclipse/group1/Library_DB.accdb");
 			return conn;
 		}catch(Exception e){
 			System.out.print(e);
