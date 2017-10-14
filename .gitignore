@@ -1,3 +1,6 @@
+*.accdb
+*.laccdb
+
 # Compiled class file
 *.class
 
