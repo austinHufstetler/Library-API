@@ -9,6 +9,7 @@ import users.*;
 public class UserTest {
 
 	public static void main(String[] args) {
+		
 		// TODO Auto-generated method stub
 		
 		//Test 1. Create Employee Accounts
@@ -20,8 +21,8 @@ public class UserTest {
 		
 		//Test 2. Edit Employee Accounts
 		
-		/*Associate a2 = new Associate("Hugo","Reyes","hreyes","lotto77");
-		UserManagement.updateAssociate(a2, 1); */
+		//Associate a2 = new Associate("Hugo","Reyes","hreyes","lotto77");
+		//UserManagement.updateAssociate(a2, 1); 
 		
 		
 		//Test 3. Remove Employee Accounts
@@ -30,8 +31,8 @@ public class UserTest {
 		
 		//Test 4. Read Employee Accounts
 		
-		/*System.out.println(UserManagement.readAssociate("jblack"));
-		System.out.println(UserManagement.readManager("kausten")); */
+		//System.out.println(UserManagement.readAssociate("jblack"));
+		//System.out.println(UserManagement.readManager("kausten")); 
 		
 		//Test 5. Create Members
 		
@@ -58,8 +59,9 @@ public class UserTest {
 		
 		//Test 9. Authorize Users (Login/Logout)
 		
-		/*System.out.println(UserManagement.authorizeUser("kausten", "password456"));
-		System.out.println(UserManagement.authorizeUser("kausten", "password4567")); */
+		System.out.println(UserManagement.authorizeUser("kausten", "password456"));
+		System.out.println(UserManagement.authorizeUser("kausten", "password4567")); 
+		
 	}
 
 }
