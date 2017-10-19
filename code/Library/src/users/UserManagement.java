@@ -14,13 +14,14 @@ public class UserManagement {
 			//String pin = m.pin;
 			Connection conn = getConnection();
 			//Statement st = conn.createStatement();
-			String sql = "INSERT INTO Members ([FName], [LName], [Username], [Password]) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO Members ([FName], [LName], [Username], [Password], [PIN_Code]) VALUES (?,?,?,?,?)";
 			//st.executeQuery(sql);
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
 			st.setString(2, m.lastName);
 			st.setString(3, m.username);
 			st.setString(4, m.password);
+			st.setString(5, m.pin);
 			st.executeUpdate();
 			//st.executeUpdate(sql);
 			//ResultSet rs = st.executeQuery(sql);
@@ -262,14 +263,19 @@ public class UserManagement {
 		    	return false;
 		    }	
 	}
-
-	private static String DuplicateCheck(String value) {
-		boolean duplicated = true;
-		do{
-			   //myFunction();
-			}while(duplicated = true);
-	return value;
+	
+	public static void checkoutBook(String isbn, String pin){
+		try{
+			Connection conn = getConnection();
+			String sql = "UPDATE Books SET PIN_Code= ? WHERE ISBN = " + isbn;
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, pin);
+			st.executeUpdate();
+		} catch(Exception e){
+			System.out.print(e);
+		} 			
 	}
+		
 
 	public static Connection getConnection(){
 		try{
@@ -279,6 +285,13 @@ public class UserManagement {
 			System.out.print(e);
 			return null;
 		}
+	}
+	
+	
+	public static String generatePINCode() {
+		Random rand = new Random();
+		int pin = rand.nextInt(89999)+10000;
+		return "" + pin;
 	}
 	
 }

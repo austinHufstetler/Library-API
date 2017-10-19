@@ -1,5 +1,6 @@
 package users;
 import common.*;
+import libraryutils.DuplicateChecker;
 
 public abstract class User extends LibraryObject{
 
@@ -8,6 +9,7 @@ public abstract class User extends LibraryObject{
 	String role;
 	String username;
 	String password;
+	String pin;
 	
 	//person who has not entered any information
 	public User(){
@@ -25,6 +27,12 @@ public abstract class User extends LibraryObject{
 		this.role = role;
 		this.username = username;
 		this.password = password;
+		String tempPin = UserManagement.generatePINCode();
+		while(DuplicateChecker.duplicateCheck(tempPin) == true) {
+			System.out.println("here");
+			tempPin = UserManagement.generatePINCode(); 
+		}
+		this.pin = tempPin;
 	}
 	
 	

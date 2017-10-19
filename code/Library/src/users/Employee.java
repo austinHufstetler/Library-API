@@ -10,8 +10,7 @@ public abstract class Employee extends User {
 	//action methods
 	private static void addMember(String firstName, String lastName, String username, String password){
 		//temporary until we make generatePin() method
-		String pin = "0000";
-		Member m = new Member(firstName, lastName, username, password, pin);
+		Member m = new Member(firstName, lastName, username, password);
 		UserManagement.createMember(m);;
 	}
 
