@@ -3,13 +3,11 @@ package users;
 import java.util.Random;
 
 public class Member extends User {
+
 	
-	String pin;
-	
-	public Member(String firstName, String lastName, String username, String password, String pin) {
+	public Member(String firstName, String lastName, String username, String password) {
 		super(firstName, lastName, "member", username, password);
 		// TODO Auto-generated constructor stub
-		this.pin = pin;
 	}
 
 	//getters and setters
@@ -46,11 +44,7 @@ public class Member extends User {
 		
 	}
 	
-	public static String generatePINCode() {
-		Random rand = new Random();
-		int pin = rand.nextInt(89999)+10000;
-		return "" + pin;
-	}
+
 	
 	
 	
