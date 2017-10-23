@@ -29,10 +29,19 @@ public abstract class User extends LibraryObject{
 		this.password = password;
 		String tempPin = UserManagement.generatePINCode();
 		while(DuplicateChecker.duplicateCheck(tempPin) == true) {
-			System.out.println("here");
 			tempPin = UserManagement.generatePINCode(); 
 		}
 		this.pin = tempPin;
+	}
+	
+	//for already created users, used for getting objects
+	public User(String firstName, String lastName, String role, String username, String password, String pin) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.role = role;
+		this.username = username;
+		this.password = password;
+		this.pin = pin;
 	}
 	
 	

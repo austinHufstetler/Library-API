@@ -13,7 +13,7 @@ public class DuplicateChecker {
 	
 	private static boolean checkDuplicateEmployees(String pin){
 		try{
-			Connection conn = UserManagement.getConnection();
+			Connection conn = Connect.getConnection();
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE PIN_Code= ?");    
 			st.setString(1, pin);   
 			ResultSet rs = st.executeQuery();
@@ -24,14 +24,14 @@ public class DuplicateChecker {
 			else
 				return false;
 		    } catch(Exception e){
-		    	System.out.println(e);
+		    	System.out.println("IGNORE " + e);
 		    	return false;
 		    }	
 	}
 	
 	private static boolean checkDuplicateMembers(String pin){
 		try{
-			Connection conn = UserManagement.getConnection();
+			Connection conn = Connect.getConnection();
 			
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE PIN_Code= ?");    
 			st.setString(1, pin);   
@@ -43,7 +43,7 @@ public class DuplicateChecker {
 			else
 				return false;
 		    } catch(Exception e){
-		    	System.out.println(e);
+		    	System.out.println("IGNORE " + e);
 		    	return false;
 		    }	
 	}
