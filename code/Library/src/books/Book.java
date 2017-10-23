@@ -1,5 +1,9 @@
 package books;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import common.*;
+import libraryutils.Connect;
 
 public class Book extends LibraryObject{
 	String isbn;
@@ -73,5 +77,41 @@ public class Book extends LibraryObject{
 	public void setHold(String hold) {
 		this.hold = hold;
 	}
+	
+	public static void holdBook(char searchBy, String search, String pin){
+		String field = "";
+		switch(searchBy){
+			case 'i': 
+				field = "ISBN";
+				break;
+			default:
+				field = "Title";
+				break;
+		}
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "UPDATE Books SET Hold = ? WHERE " + field + " = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, pin);
+			st.setString(2, search);
+			st.executeUpdate();
+			System.out.println("You have successfully checkout out a book!");
+		} catch(Exception e){
+			System.out.print("Hold book error " + e);
+		} 		
+	}
+	
+	public static void checkoutBook(String isbn, String pin){
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "UPDATE Books SET PIN_Code= ? WHERE ISBN = " + isbn;
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, pin);
+			st.executeUpdate();
+		} catch(Exception e){
+			System.out.print(e);
+		} 	
+	}
+	
 
 }
