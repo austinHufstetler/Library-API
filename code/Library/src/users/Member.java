@@ -38,28 +38,6 @@ public class Member extends User {
 		
 	}
 	
-	public void holdBook(char searchBy, String search){
-		String field = "";
-		switch(searchBy){
-			case 'i': 
-				field = "ISBN";
-				break;
-			default:
-				field = "Title";
-				break;
-		}
-		try{
-			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Books SET Hold = ? WHERE " + field + " = ?";
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, this.pin);
-			st.setString(2, search);
-			st.executeUpdate();
-			System.out.println("You have successfully checkout out a book!");
-		} catch(Exception e){
-			System.out.print("Hold book error " + e);
-		} 		
-	}
 	
 	private static void displayCheckedOutBooks(){
 		

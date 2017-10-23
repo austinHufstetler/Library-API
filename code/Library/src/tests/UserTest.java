@@ -69,10 +69,9 @@ public class UserTest {
 			m1.checkoutBook("9784003234242","10109");
 		}*/
 		
-		//Test 11.Hold a book
+		//Test 11.Get a Member
 		Member m1 = UserManagement.getMember("dpickle");
 		System.out.println(m1.getFirstName());
-		m1.holdBook('i',"9780099273936");
 		
 
 		
