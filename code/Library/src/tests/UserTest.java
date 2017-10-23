@@ -36,8 +36,8 @@ public class UserTest {
 		
 		//Test 5. Create Members
 		
-		Member m1 = new Member("Janet","Jackson","jjackson","gemini98");
-		UserManagement.createMember(m1); 
+		//Member m1 = new Member("Janet","Jackson","jjackson","gemini98");
+		//UserManagement.createMember(m1); 
 		
 		//Test 6. Edit Members
 		
@@ -63,7 +63,16 @@ public class UserTest {
 		//System.out.println(UserManagement.authorizeUser("kausten", "password4567")); 
 		
 		//Test 10. Checkout book
-		//UserManagement.checkoutBook("9784003234242","10101");
+		/*System.out.println(UserManagement.readManager("hreyes"));
+		Manager m1 = UserManagement.getManager("hreyes");
+		if (m1 != null){
+			m1.checkoutBook("9784003234242","10109");
+		}*/
+		
+		//Test 11.Hold a book
+		Member m1 = UserManagement.getMember("dpickle");
+		System.out.println(m1.getFirstName());
+		m1.holdBook('i',"9780099273936");
 		
 
 		

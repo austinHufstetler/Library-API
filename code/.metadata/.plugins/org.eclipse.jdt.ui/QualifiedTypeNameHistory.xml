@@ -3,4 +3,6 @@
 <fullyQualifiedTypeName name="users.Member"/>
 <fullyQualifiedTypeName name="books.Book"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="users.UserManagement"/>
+<fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
 </qualifiedTypeNameHistroy>

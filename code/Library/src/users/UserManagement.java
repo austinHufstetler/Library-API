@@ -2,6 +2,7 @@ package users;
 
 import java.sql.*;
 import java.util.Random;
+import libraryutils.Connect;
 
 public class UserManagement {
 
@@ -12,7 +13,7 @@ public class UserManagement {
 		try{
 			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
 			//String pin = m.pin;
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			//Statement st = conn.createStatement();
 			String sql = "INSERT INTO Members ([FName], [LName], [Username], [Password], [PIN_Code]) VALUES (?,?,?,?,?)";
 			//st.executeQuery(sql);
@@ -37,7 +38,7 @@ public class UserManagement {
 	//changes return type to string later, void is for testing
 	public static String readMember(String username){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE Username = ?");    
 			st.setString(1, username);    
@@ -55,9 +56,31 @@ public class UserManagement {
 		
 	}
 	
+	public static Member getMember(String username){
+		try{
+			Connection conn = Connect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE Username = ?");    
+			st.setString(1, username);    
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			int id = rs.getInt("ID");
+			String fname = rs.getString("FName");
+			String lname= rs.getString("LName");
+			String uname = rs.getString("Username");
+			String password =  rs.getString("Password");
+			String pincode =  rs.getString("PIN_Code");
+			System.out.println("you have gotten a member");
+			return new Member(fname,lname,uname,password,pincode);
+		    } catch(Exception e){
+		    	System.out.println(e);
+		    	return null;
+		    }		
+	}
+	
 	public static void updateMember(Member m, int id){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "UPDATE Members SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
@@ -72,7 +95,7 @@ public class UserManagement {
 	
 	public static void deleteMember(String username){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "DELETE FROM Members WHERE Username = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, username);
@@ -87,7 +110,7 @@ public class UserManagement {
 	////////////////////
 	public static void createManager(Manager m){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "INSERT INTO Employees ([FName], [LName], [Username], [Password],[Role]) VALUES (?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
@@ -103,7 +126,7 @@ public class UserManagement {
 	
 	public static String readManager(String username){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ?");    
 			st.setString(1, username);    
@@ -120,9 +143,29 @@ public class UserManagement {
 		    }		
 	}
 	
+	public static Manager getManager(String username){
+		try{
+			Connection conn = Connect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ?");    
+			st.setString(1, username);    
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			int id = rs.getInt("ID");
+			String fname = rs.getString("FName");
+			String lname= rs.getString("LName");
+			String uname = rs.getString("Username");
+			String password =  rs.getString("Password");
+
+			return new Manager(fname,lname,uname,password);
+		    } catch(Exception e){
+		    	return null;
+		    }		
+	}
+	
 	public static void updateManager(Manager m, int id){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "UPDATE Employees SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
@@ -137,7 +180,7 @@ public class UserManagement {
 	
 	public static void deleteManager(String username){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "DELETE FROM Employees WHERE Username = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, username);
@@ -152,7 +195,7 @@ public class UserManagement {
 	/////////////////////
 	public static void createAssociate(Associate a){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "INSERT INTO Employees ([FName], [LName], [Username], [Password],[Role]) VALUES (?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, a.firstName);
@@ -168,7 +211,7 @@ public class UserManagement {
 	
 	public static String readAssociate(String username){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ?");    
 			st.setString(1, username);    
@@ -186,9 +229,28 @@ public class UserManagement {
 		    }		
 	}
 	
+	public static Associate getAssociate(String username){
+		try{
+			Connection conn = Connect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ?");    
+			st.setString(1, username);    
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			int id = rs.getInt("ID");
+			String fname = rs.getString("FName");
+			String lname= rs.getString("LName");
+			String uname = rs.getString("Username");
+			String password =  rs.getString("Password");
+			return new Associate(fname,lname,uname,password);
+		    } catch(Exception e){
+		    	return null;
+		    }		
+	}
+	
 	public static void updateAssociate(Associate m, int id){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "UPDATE Employees SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
@@ -203,7 +265,7 @@ public class UserManagement {
 	
 	public static void deleteAssociate(String username){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "DELETE FROM Employees WHERE Username = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, username);
@@ -220,7 +282,7 @@ public class UserManagement {
 	
 	private static boolean authorizeEmployee(String username, String password){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ? AND Password = ?");    
 			st.setString(1, username);   
@@ -243,7 +305,7 @@ public class UserManagement {
 	
 	private static boolean authorizeMember(String username, String password){
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE Username = ? AND Password = ?");    
 			st.setString(1, username);   
@@ -264,7 +326,26 @@ public class UserManagement {
 		    }	
 	}
 	
-	public static void checkoutBook(String isbn, String pin){
+	//delete later, added to Connect class
+	/*public static Connection getConnection(){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/gitclipse/group1/Library_DB.accdb");
+			return conn;
+		}catch(Exception e){
+			System.out.print(e);
+			return null;
+		}
+	} */
+	
+	
+	public static String generatePINCode() {
+		Random rand = new Random();
+		int pin = rand.nextInt(89999)+10000;
+		return "" + pin;
+	}
+	
+	//delete from this class later, added to Member class
+	/*public static void checkoutBook(String isbn, String pin){
 		try{
 			Connection conn = getConnection();
 			String sql = "UPDATE Books SET PIN_Code= ? WHERE ISBN = " + isbn;
@@ -274,24 +355,6 @@ public class UserManagement {
 		} catch(Exception e){
 			System.out.print(e);
 		} 			
-	}
-		
-
-	public static Connection getConnection(){
-		try{
-			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/gitclipse/group1/Library_DB.accdb");
-			return conn;
-		}catch(Exception e){
-			System.out.print(e);
-			return null;
-		}
-	}
-	
-	
-	public static String generatePINCode() {
-		Random rand = new Random();
-		int pin = rand.nextInt(89999)+10000;
-		return "" + pin;
-	}
+	}*/
 	
 }
