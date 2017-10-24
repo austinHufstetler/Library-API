@@ -1,6 +1,7 @@
 package books;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import common.*;
 import libraryutils.Connect;
@@ -78,6 +79,7 @@ public class Book extends LibraryObject{
 		this.hold = hold;
 	}
 	
+	/*old way, may be useful in future
 	public static void holdBook(char searchBy, String search, String pin){
 		String field = "";
 		switch(searchBy){
@@ -100,17 +102,79 @@ public class Book extends LibraryObject{
 			System.out.print("Hold book error " + e);
 		} 		
 	}
+	*/
+	public void holdBook(String pin){
+		if(this.isAvailableHold()) {
+			try{
+				Connection conn = Connect.getConnection();
+				String sql = "UPDATE Books SET Hold = ? WHERE ID= " + this.getId();
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setString(1, pin);
+				st.executeUpdate();
+			} catch(Exception e){
+				System.out.print(e);
+			} 	
+		}
+		else{
+			System.out.println("Not available for holding");
+		}
+	}
 	
-	public static void checkoutBook(String isbn, String pin){
+	public boolean isAvailableHold(){
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Books SET PIN_Code= ? WHERE ISBN = " + isbn;
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, pin);
-			st.executeUpdate();
-		} catch(Exception e){
-			System.out.print(e);
-		} 	
+			
+			PreparedStatement st = conn.prepareStatement("SELECT Hold FROM Books WHERE ID = "+this.getId());     
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String hold = rs.getString("Hold");
+			if(hold.equals("0")){
+				return true;
+			}
+			else{
+				return false;
+			}
+		    } catch(Exception e){
+		    	System.out.println(e);
+		    	return false;
+		    }			
+	}
+	
+	public void checkoutBook(String pin){
+		if(this.isAvailableCheckout()) {
+			try{
+				Connection conn = Connect.getConnection();
+				String sql = "UPDATE Books SET PIN_Code= ? WHERE ID= " + this.getId();
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setString(1, pin);
+				st.executeUpdate();
+			} catch(Exception e){
+				System.out.print(e);
+			} 	
+		}
+		else{
+			System.out.println("This book is not available for checkout");
+		}
+	}
+	
+	public boolean isAvailableCheckout(){
+		try{
+			Connection conn = Connect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement("SELECT PIN_Code FROM Books WHERE ID = "+this.getId());     
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String pin = rs.getString("PIN_Code");
+			if(pin.equals("0")){
+				return true;
+			}
+			else{
+				return false;
+			}
+		    } catch(Exception e){
+		    	System.out.println(e);
+		    	return false;
+		    }	
 	}
 	
 
