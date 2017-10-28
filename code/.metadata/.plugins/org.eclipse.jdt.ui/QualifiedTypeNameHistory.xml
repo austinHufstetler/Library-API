@@ -6,4 +6,5 @@
 <fullyQualifiedTypeName name="users.UserManagement"/>
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
 <fullyQualifiedTypeName name="libraryutils.Connect"/>
+<fullyQualifiedTypeName name="users.FineManagement"/>
 </qualifiedTypeNameHistroy>
