@@ -26,6 +26,5 @@ public class BookTest {
 		Book b2 = new Book("123456","John","Adams", "Declaration of Indepedence", "romance", "1776", "0");
 		b1.setId(3);
 		b1.checkoutBook("80808");
-		
 	}
 }
