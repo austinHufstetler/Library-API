@@ -56,6 +56,7 @@ public class Member extends User {
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private void holdBook(){
 		
 =======
@@ -82,6 +83,8 @@ public class Member extends User {
 		} 		
 >>>>>>> master
 	}
+=======
+>>>>>>> master
 	
 	private void displayCheckedOutBooks(){
 		

@@ -5,4 +5,5 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="users.UserManagement"/>
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
+<fullyQualifiedTypeName name="libraryutils.Connect"/>
 </qualifiedTypeNameHistroy>
