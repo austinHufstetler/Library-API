@@ -25,6 +25,7 @@ public class BookManagement {
 			System.out.print(e);
 		}
 	}
+	
 	public Book search(Book book) {
 		try{
 			ResultSet rs = byTitle(book).executeQuery();
@@ -39,6 +40,7 @@ public class BookManagement {
 			return null;
 		}
 	}
+	
 	public PreparedStatement byId(Book book){
 		try{
 			String sql = "SELECT * FROM Books WHERE ID = ?";
@@ -50,6 +52,7 @@ public class BookManagement {
 			return null;
 		}
 	}
+	
 	public PreparedStatement byTitle(Book book){
 		try{
 			String sql = "SELECT * FROM Books WHERE Title = ?";
@@ -88,6 +91,8 @@ public class BookManagement {
 			System.out.print(e);
 		}
 	}
+	
+	
 
 
 
