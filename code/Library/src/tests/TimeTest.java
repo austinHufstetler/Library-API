@@ -2,6 +2,7 @@ package tests;
 
 import java.util.Date;
 
+import time.TimeManagement;
 import time.TimeTools;
 
 public class TimeTest {
@@ -16,6 +17,8 @@ public class TimeTest {
 		Date d2 = TimeTools.convertDate(inputString);
 		System.out.println(TimeTools.getDayDifference(d1, d2));
 		
+		//2. Update book times everyday, false if failed, true if success
+		System.out.println(TimeManagement.updateBookTimes());
 	}
 
 }
