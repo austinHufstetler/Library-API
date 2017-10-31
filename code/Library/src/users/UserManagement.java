@@ -156,7 +156,6 @@ public class UserManagement {
 			String lname= rs.getString("LName");
 			String uname = rs.getString("Username");
 			String password =  rs.getString("Password");
-
 			return new Manager(fname,lname,uname,password);
 		    } catch(Exception e){
 		    	return null;
@@ -275,9 +274,27 @@ public class UserManagement {
 		} 			
 	}
 	
+	/*
+	 *
+	 *
+	ALL LOGIN AND AUTHORIZE METHODS NEED TO BE PUT IN SEPARATE CLASS LATER, TOO MUCH FOR THIS CLASS
+	 *
+	 *
+	
+	
+	public static User login(String username, String password){
+		User u = null;
+		if(authorizeUser(username, password)){
+			if(authorizeMember(username,password)){
+				
+			}
+			
+		}
+		return u;
+	}
+	
 	public static boolean authorizeUser(String username, String password){
 		return authorizeEmployee(username,password) || authorizeMember(username, password);
-
 	}
 	
 	private static boolean authorizeEmployee(String username, String password){
@@ -293,6 +310,53 @@ public class UserManagement {
 			String pswd =  rs.getString("Password"); 
 			
 			if(uname.equals(username) && pswd.equals(password)){
+				return true;
+			}
+			else{
+				return false;
+			}
+		    } catch(Exception e){
+		    	return false;
+		    }	
+	}
+	
+	private static boolean authorizeAssociate(String username, String password){
+		try{
+			Connection conn = Connect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ? AND Password = ? AND Role = ?");    
+			st.setString(1, username);   
+			st.setString(2, password);   
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String uname = rs.getString("Username");
+			String pswd =  rs.getString("Password"); 
+			String role =  rs.getString("Role"); 
+			if(uname.equals(username) && pswd.equals(password) && role.equals("associate")){
+				return true;
+			}
+			else{
+				return false;
+			}
+		    } catch(Exception e){
+		    	return false;
+		    }	
+	}
+	
+	private static boolean authorizeManager(String username, String password){
+		try{
+			Connection conn = Connect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ? AND Password = ? AND Role = ?");    
+			st.setString(1, username);   
+			st.setString(2, password);   
+			st.setString(2, password);  
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String uname = rs.getString("Username");
+			String pswd =  rs.getString("Password"); 
+			String role =  rs.getString("Role"); 
+			if(uname.equals(username) && pswd.equals(password) && role.equals("manager")){
 				return true;
 			}
 			else{
@@ -325,6 +389,7 @@ public class UserManagement {
 		    	return false;
 		    }	
 	}
+	*/
 	
 	//delete later, added to Connect class
 	/*public static Connection getConnection(){

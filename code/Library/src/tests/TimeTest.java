@@ -11,14 +11,18 @@ public class TimeTest {
 		// TODO Auto-generated method stub
 		
 		//1. Get number of days between two dates
-		Date d1 = new Date();
+		//Date d1 = new Date();
+		
 		//Date d2 = new Date();
-		String inputString = "11-11-2016";
+		/*String inputString = "11-11-2016";
 		Date d2 = TimeTools.convertDate(inputString);
-		System.out.println(TimeTools.getDayDifference(d1, d2));
+		System.out.println(TimeTools.getDayDifference(d1, d2)); */
 		
 		//2. Update book times everyday, false if failed, true if success
-		System.out.println(TimeManagement.updateBookTimes());
+		//System.out.println(TimeManagement.updateBookTimes());
+		
+		//3. Update fees everyday, false if failed, true if success
+		System.out.println(TimeManagement.updateFines());
 	}
 
 }
