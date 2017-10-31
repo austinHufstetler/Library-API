@@ -7,4 +7,8 @@
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
 <fullyQualifiedTypeName name="libraryutils.Connect"/>
 <fullyQualifiedTypeName name="users.FineManagement"/>
+<fullyQualifiedTypeName name="time.TimeTools"/>
+<fullyQualifiedTypeName name="java.text.DateFormat"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="time.TimeManagement"/>
 </qualifiedTypeNameHistroy>

@@ -70,8 +70,18 @@ public class UserTest {
 		}*/
 		
 		//Test 11.Get a Member
-		Member m1 = UserManagement.getMember("dpickle");
-		System.out.println(m1.getFirstName());
+		//Member m1 = UserManagement.getMember("dpickle");
+		//System.out.println(m1.getFirstName());
+		
+		//Test 12. Suspend Member
+		
+		//Test 13. Login
+		User u1 = Authorization.login("bstein","honeypot_98");
+		System.out.println(u1.getFirstName());
+		System.out.println(u1.getRole());
+		if(u1 instanceof Manager){
+			System.out.println("Correct!");
+		}
 		
 
 		
