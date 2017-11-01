@@ -11,4 +11,5 @@
 <fullyQualifiedTypeName name="java.text.DateFormat"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="time.TimeManagement"/>
+<fullyQualifiedTypeName name="users.Authorization"/>
 </qualifiedTypeNameHistroy>

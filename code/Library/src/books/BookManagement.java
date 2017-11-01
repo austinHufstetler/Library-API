@@ -2,8 +2,11 @@ package books;
 
 import java.sql.*;
 import books.Book;
+import common.LibraryConstants;
+import libraryutils.Connect;
+import users.Associate;
 
-public class BookManagement {
+public class BookManagement implements LibraryConstants {
 
 
 	public void add(Book book) {
@@ -90,6 +93,35 @@ public class BookManagement {
 		} catch(Exception e){
 			System.out.print(e);
 		}
+	}
+	
+	//is this the right place for it?
+	public static String[][] returnCheckedOutBooks(String pin){
+		String[][] books= new String[MAX_BOOKS_CHECKOUT][NUM_FIELDS_BOOKS];
+		try{
+			Connection conn = Connect.getConnection();
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Books WHERE PIN_Code = ?");    
+			st.setString(1, pin);    
+			ResultSet rs = st.executeQuery();
+			int i = 0;
+			while(rs.next()) {
+				books[i][0] = "" + rs.getInt("ID");
+				books[i][1] = rs.getString("ISBN");
+				books[i][2] = rs.getString("Author_FName");
+				books[i][3] = rs.getString("Author_LName");
+				books[i][4] =  rs.getString("Title");
+				books[i][5] = rs.getString("Genre");
+				books[i][6] = rs.getString("ReleaseYear");
+				books[i][7] = rs.getString("Hold");
+				books[i][8] =  rs.getString("PIN_Code");
+				books[i][9] = "" + rs.getString("DaysCheckedOut");
+				i++;
+			}
+			return books;
+		} catch(Exception e){
+			System.out.print(e);
+			return books;
+		}		
 	}
 	
 	
