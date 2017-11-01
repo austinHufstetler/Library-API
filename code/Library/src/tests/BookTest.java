@@ -17,7 +17,7 @@ public class BookTest {
 		Book testBook = manager.search(book);
 		System.out.print(testBook.getIsbn() == "test");
 		manager.delete(book); */
-		
+		/*
 		//1. checkout book
 		Book b1 = new Book("123456","John","Adams", "Declaration of Indepedence", "romance", "1776", "0");
 		b1.setId(6);
@@ -26,5 +26,18 @@ public class BookTest {
 		Book b2 = new Book("123456","John","Adams", "Declaration of Indepedence", "romance", "1776", "0");
 		b1.setId(3);
 		b1.checkoutBook("80808");
+		*/
+		
+		//Test 3. Display CheckedoutBooks
+		String[][] checkedout = BookManagement.returnCheckedOutBooks("10101");
+		for(int i=0; i<checkedout.length; i++){
+			for(int j=0; j<checkedout[0].length;j++){
+				if(checkedout[i][j] == null){
+					break;
+				}
+				System.out.print(checkedout[i][j] + " ");;
+			}
+			System.out.println();
+		}
 	}
 }

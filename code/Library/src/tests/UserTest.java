@@ -76,12 +76,18 @@ public class UserTest {
 		//Test 12. Suspend Member
 		
 		//Test 13. Login
-		User u1 = Authorization.login("bstein","honeypot_98");
+		/*User u1 = Authorization.login("bstein","honeypot_98");
 		System.out.println(u1.getFirstName());
 		System.out.println(u1.getRole());
 		if(u1 instanceof Manager){
 			System.out.println("Correct!");
-		}
+		} */
+		
+		//Test 14. Suspend Member
+		//UserManagement.suspendMember("dpickle");
+		
+		//Test 15. unsuspend Member
+		UserManagement.unsuspendMember("dpickle");
 		
 
 		
