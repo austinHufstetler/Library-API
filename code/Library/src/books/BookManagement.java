@@ -36,15 +36,15 @@ public class BookManagement implements LibraryConstants {
 			while(rs.next()){
 				Book result = new Book();
 				result.setId(rs.getInt("ID"));
-				result.setId(rs.getString("ISBN"));
-				result.setId(rs.getString("Author_FName"));
-				result.setId(rs.getString("Author_LName"));
-				result.setId(rs.getString("Title"));
-				result.setId(rs.getString("Genre"));
-				result.setId(rs.getString("ReleaseYear"));
-				result.setId(rs.getString("Hold"));
-				result.setId(rs.getString("PIN_Code"));
-				result.setId(rs.getString("DaysCheckedOut"));
+				result.setIsbn(rs.getString("ISBN"));
+				result.setAuthorFirstName(rs.getString("Author_FName"));
+				result.setAuthorLastName(rs.getString("Author_LName"));
+				result.setTitle(rs.getString("Title"));
+				result.setGenre(rs.getString("Genre"));
+				result.setReleaseYear(rs.getString("ReleaseYear"));
+				result.setHold(rs.getString("Hold"));
+				result.setPin(rs.getString("PIN_Code"));
+				result.setDaysCheckedOut(rs.getString("DaysCheckedOut"));
 				list.add(result);
 			}
 
