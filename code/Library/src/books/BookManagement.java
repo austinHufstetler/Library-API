@@ -29,14 +29,26 @@ public class BookManagement implements LibraryConstants {
 		}
 	}
 	
-	public Book search(Book book) {
+	public ArrayList<Book> search(Book book) {
+		ArrayList<Book> list = new ArrayList<Book>();
 		try{
 			ResultSet rs = byTitle(book).executeQuery();
-			rs.next();
-			int id = rs.getInt("ID");
-			Book result = new Book(rs.getString("ISBN"),rs.getString("Author_FName"),rs.getString("Author_LName"),rs.getString("Title"),rs.getString("Genre"),rs.getString("ReleaseYear"),rs.getString("Hold"));
-			result.setId(id);
-			return result;
+			while(rs.next()){
+				Book result = new Book();
+				result.setId(rs.getInt("ID"));
+				result.setId(rs.getString("ISBN"));
+				result.setId(rs.getString("Author_FName"));
+				result.setId(rs.getString("Author_LName"));
+				result.setId(rs.getString("Title"));
+				result.setId(rs.getString("Genre"));
+				result.setId(rs.getString("ReleaseYear"));
+				result.setId(rs.getString("Hold"));
+				result.setId(rs.getString("PIN_Code"));
+				result.setId(rs.getString("DaysCheckedOut"));
+				list.add(result);
+			}
+
+			return list;
 
 		} catch(Exception e){
 			System.out.print(e);

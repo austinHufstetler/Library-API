@@ -14,7 +14,15 @@ public class Book extends LibraryObject{
 	String genre;
 	String releaseYear;
 	String hold;
+	String pin;
+	String daysCheckedOut;
 
+	//Basic Book constructor
+	public Book(){
+		
+	}
+
+	//Book Constructor that sets all fields in parameter
 	public Book(String isbn,String authorFirstName,String authorLastName, String title, String genre, String releaseYear, String hold) {
 		super();
 		this.isbn = isbn;
@@ -71,12 +79,28 @@ public class Book extends LibraryObject{
 		this.releaseYear = releaseYear;
 	}
 
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
 	public String getHold() {
 		return hold;
 	}
 
 	public void setHold(String hold) {
 		this.hold = hold;
+	}
+
+	public String getDaysCheckedOut() {
+		return daysCheckedOut;
+	}
+
+	public void setDaysCheckedOut(String daysCheckedOut) {
+		this.daysCheckedOut = daysCheckedOut;
 	}
 	
 	/*old way, may be useful in future
