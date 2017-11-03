@@ -1,4 +1,5 @@
 package users;
+import books.Book;
 import common.*;
 import libraryutils.DuplicateChecker;
 
@@ -80,5 +81,9 @@ public abstract class User extends LibraryObject{
 	//action methods
 	public static void requestMembership(){
 		
+	}
+	
+	public void checkoutBook(Book b, String pin){
+		b.checkoutBook(pin);
 	}
 }
