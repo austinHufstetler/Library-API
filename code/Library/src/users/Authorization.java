@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import libraryexceptions.InvalidUserException;
 import libraryutils.Connect;
 
 public class Authorization {
-	public static User login(String username, String password){
+	
+	public static User login(String username, String password) throws InvalidUserException{
 		User u = null;
 		if(authorizeUser(username, password)){
 			System.out.println("You exist!");
@@ -22,7 +24,10 @@ public class Authorization {
 			else if(authorizeAssociate(username, password)){
 				System.out.println("You're an associate!");
 				u = UserManagement.getAssociate(username);
-			}	
+			}
+		}
+		else{
+			throw new InvalidUserException("That user doesn't exist!");
 		}
 		return u;
 	}
@@ -50,7 +55,7 @@ public class Authorization {
 				return false;
 			}
 		    } catch(Exception e){
-		    	System.out.println(e);
+		    	//System.out.println(e);
 		    	return false;
 		    }	
 	}
@@ -75,7 +80,7 @@ public class Authorization {
 				return false;
 			}
 		    } catch(Exception e){
-		    	System.out.println(e);
+		    	//System.out.println(e);
 		    	return false;
 		    }	
 	}
@@ -100,7 +105,7 @@ public class Authorization {
 				return false;
 			}
 		    } catch(Exception e){
-		    	System.out.println(e);
+		    	//System.out.println(e);
 		    	return false;
 		    }	
 	}
@@ -124,7 +129,7 @@ public class Authorization {
 				return false;
 			}
 		    } catch(Exception e){
-		    	System.out.println(e);
+		    	//System.out.println(e);
 		    	return false;
 		    }	
 	}

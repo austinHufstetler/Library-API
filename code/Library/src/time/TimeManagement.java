@@ -4,9 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import common.LibraryConstants;
 import libraryutils.Connect;
 
-public class TimeManagement {
+public class TimeManagement implements LibraryConstants{
+	
+	public static void newDay(){
+		updateBookTimes();
+		updateFines();
+	}
 
 	public static boolean updateBookTimes(){
 		try{
@@ -46,7 +52,7 @@ public class TimeManagement {
 					double currentFees = hs.getDouble("Fees");
 					PreparedStatement st = conn.prepareStatement("UPDATE Members SET Fees= ? WHERE PIN_Code = ?");
 					//right number?
-					st.setString(1, Double.toString(currentFees + 0.25));
+					st.setString(1, Double.toString(currentFees + LATE_FEE));
 					st.setString(2, pin);
 					st.executeUpdate();
 				}

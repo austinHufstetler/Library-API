@@ -5,11 +5,12 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="users.UserManagement"/>
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
-<fullyQualifiedTypeName name="libraryutils.Connect"/>
 <fullyQualifiedTypeName name="users.FineManagement"/>
 <fullyQualifiedTypeName name="time.TimeTools"/>
 <fullyQualifiedTypeName name="java.text.DateFormat"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="time.TimeManagement"/>
 <fullyQualifiedTypeName name="users.Authorization"/>
+<fullyQualifiedTypeName name="common.LibraryConstants"/>
+<fullyQualifiedTypeName name="libraryutils.Connect"/>
 </qualifiedTypeNameHistroy>
