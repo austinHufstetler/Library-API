@@ -43,8 +43,12 @@ public class Member extends User {
 		
 	}
 	
-	private static void displayFines(){
-		
+	public void displayFines(){
+		System.out.println(returnFines());
+	}
+	
+	public double returnFines(){
+		return FineManagement.getFines(this.username);
 	}
 	
 
