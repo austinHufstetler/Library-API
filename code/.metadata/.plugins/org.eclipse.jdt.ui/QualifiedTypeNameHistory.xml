@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="users.Member"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="users.UserManagement"/>
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
@@ -11,9 +10,13 @@
 <fullyQualifiedTypeName name="time.TimeManagement"/>
 <fullyQualifiedTypeName name="libraryutils.Connect"/>
 <fullyQualifiedTypeName name="common.LibraryConstants"/>
-<fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="users.Authorization"/>
 <fullyQualifiedTypeName name="users.User"/>
 <fullyQualifiedTypeName name="books.Book"/>
 <fullyQualifiedTypeName name="libraryexceptions.InvalidUserException"/>
+<fullyQualifiedTypeName name="users.Member"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="users.Manager"/>
+<fullyQualifiedTypeName name="users.Associate"/>
 </qualifiedTypeNameHistroy>

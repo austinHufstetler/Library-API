@@ -51,6 +51,10 @@ public class Member extends User {
 		return FineManagement.getFines(this.username);
 	}
 	
+	public void payFines(double amount){
+		FineManagement.payFines(this.username, amount);
+	}
+	
 
 	
 	
