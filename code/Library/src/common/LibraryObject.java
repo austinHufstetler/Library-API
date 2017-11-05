@@ -9,7 +9,6 @@ public class LibraryObject {
 		return this.id;
 	}
 
-	//testing purposes only !!!!!!
 	public void setId(int id){
 		this.id = id;
 	}
