@@ -8,8 +8,21 @@ import users.Associate;
 
 public class BookManagement implements LibraryConstants {
 
+	Book book = new Book();
 
-	public void add(Book book) {
+	public BookManagement(Book book){
+		this.book = book;
+	}
+
+	public Book getBook(){
+		return this.book;
+	}
+
+	public Book setBook(Book book){
+		this.book = book;
+	}
+
+	public void add() {
 		try{
 			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
 			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
@@ -29,10 +42,12 @@ public class BookManagement implements LibraryConstants {
 		}
 	}
 	
-	public ArrayList<Book> search(Book book) {
+	public ArrayList<Book> search(String param) {
 		ArrayList<Book> list = new ArrayList<Book>();
 		try{
-			ResultSet rs = byTitle(book).executeQuery();
+			String sql = "SELECT * FROM Books " + param;
+			PreparedStatement st = new PreparedStatement(sql);
+			ResultSet rs = st.executeQuery();
 			while(rs.next()){
 				Book result = new Book();
 				result.setId(rs.getInt("ID"));
@@ -44,7 +59,6 @@ public class BookManagement implements LibraryConstants {
 				result.setReleaseYear(rs.getString("ReleaseYear"));
 				result.setHold(rs.getString("Hold"));
 				result.setPin(rs.getString("PIN_Code"));
-				result.setDaysCheckedOut(rs.getString("DaysCheckedOut"));
 				list.add(result);
 			}
 
@@ -56,29 +70,38 @@ public class BookManagement implements LibraryConstants {
 		}
 	}
 	
-	public PreparedStatement byId(Book book){
-		try{
-			String sql = "SELECT * FROM Books WHERE ID = ?";
-			PreparedStatement st = getConnection().prepareStatement(sql);
-			st.setInt(1, book.getId());
-			return st;
-		}catch(Exception e){
-			System.out.print(e);
-			return null;
-		}
+	public String byId(){
+		return "WHERE ID = " + book.getId();
 	}
 	
-	public PreparedStatement byTitle(Book book){
-		try{
-			String sql = "SELECT * FROM Books WHERE Title = ?";
-			PreparedStatement st = getConnection().prepareStatement(sql);
-			st.setString(1, book.getTitle());
-			return st;
-		}catch(Exception e){
-			System.out.print(e);
-			return null;
-		}
+	public String byTitle(){
+		return "WHERE Title = " + book.getTitle();
 	}
+
+	public String byISBN(){
+		return "WHERE ISBN = " + book.getIsbn();
+	}
+
+	public String byAuthorFName(){
+		return "WHERE Author_FName = " + book.getAuthorFirstName();
+	}
+
+	public String byAuthorLName(){
+		return "WHERE Author_LName = " + book.getAuthorLastName();
+	}
+
+	public String byReleaseYear(){
+		return "WHERE ReleaseYear = " + book.getReleaseYear();
+	}
+
+	public String byHold(){
+		return "WHERE Hold = " + book.getHold();
+	}
+
+	public String byPin(){
+		return "WHERE PIN_Code = " + book.getPin();
+	}
+
 	public Connection getConnection(){
 		try{
 			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/gitclipse/group1/Library_DB.accdb");
@@ -89,16 +112,16 @@ public class BookManagement implements LibraryConstants {
 		}
 	}
 
-	public void update(Book book) {
+	public void update() {
 
 	}
 
-	public void delete(Book book) {
+	public void delete(String param) {
 		try{
 			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
 			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
 			Connection conn = getConnection();
-			String sql = "DELETE FROM Books WHERE Title = ?";
+			String sql = "DELETE FROM Books " + param;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, book.getTitle());
 			st.execute();
@@ -108,32 +131,10 @@ public class BookManagement implements LibraryConstants {
 	}
 	
 	//is this the right place for it?
-	public static String[][] returnCheckedOutBooks(String pin){
-		String[][] books= new String[MAX_BOOKS_CHECKOUT][NUM_FIELDS_BOOKS];
-		try{
-			Connection conn = Connect.getConnection();
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM Books WHERE PIN_Code = ?");    
-			st.setString(1, pin);    
-			ResultSet rs = st.executeQuery();
-			int i = 0;
-			while(rs.next()) {
-				books[i][0] = "" + rs.getInt("ID");
-				books[i][1] = rs.getString("ISBN");
-				books[i][2] = rs.getString("Author_FName");
-				books[i][3] = rs.getString("Author_LName");
-				books[i][4] =  rs.getString("Title");
-				books[i][5] = rs.getString("Genre");
-				books[i][6] = rs.getString("ReleaseYear");
-				books[i][7] = rs.getString("Hold");
-				books[i][8] =  rs.getString("PIN_Code");
-				books[i][9] = "" + rs.getString("DaysCheckedOut");
-				i++;
-			}
-			return books;
-		} catch(Exception e){
-			System.out.print(e);
-			return books;
-		}		
+	public ArrayList<Book> returnCheckedOutBooks(String pin){
+			book.setPin(pin);
+			return search(byPin());
+				
 	}
 	
 	
