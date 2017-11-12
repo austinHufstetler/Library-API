@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import users.UserManagement;
 
 public class DuplicateChecker {
+	
 	public static boolean duplicateCheck(String pin) {
 		return checkDuplicateEmployees(pin) | checkDuplicateMembers(pin);
 	}

@@ -26,7 +26,7 @@ public class IntegrationTesting {
 				//String bookTitle = scan.next();
 				//System.out.println("Search for a book, type in a book title");
 				if(m1 instanceof Member){
-					Simulation.userSimulation((Member)m1, scan);
+					Simulation.memberSimulation((Member)m1, scan);
 				}
 				if(m1 instanceof Manager){
 					Simulation.userSimulation((Member)m1, scan);

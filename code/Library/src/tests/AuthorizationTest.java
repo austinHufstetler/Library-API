@@ -17,7 +17,6 @@ public class AuthorizationTest {
 		//testing with authorizemanager, should return true
 		System.out.println(Authorization.authorizeManager("jbrown", "stargirl123"));
 		
-		
 		//Test 2. authorize manager
 		
 		//Test 3. authorize member
