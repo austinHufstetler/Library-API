@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import books.Book;
 import books.*;
@@ -28,6 +29,7 @@ public class BookTest {
 		b1.checkoutBook("80808");
 		*/
 		
+		/*
 		//Test 3. Display CheckedoutBooks
 		String[][] checkedout = BookManagement.returnCheckedOutBooks("10101");
 		for(int i=0; i<checkedout.length; i++){
@@ -39,5 +41,14 @@ public class BookTest {
 			}
 			System.out.println();
 		}
+		*/
+		
+		//Test 3. Display CheckedoutBooks
+		BookManagement b1 = new BookManagement(new Book());
+		ArrayList<Book> checkedout = b1.returnCheckedOutBooks("10101");
+		for(int i=0; i<checkedout.size(); i++){
+				System.out.println(checkedout.get(i).getTitle());
+			}
+			System.out.println();
 	}
 }

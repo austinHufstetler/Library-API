@@ -20,7 +20,7 @@ public class BookManagement implements LibraryConstants {
 		return this.book;
 	}
 
-	public Book setBook(Book book){
+	public void setBook(Book book){
 		this.book = book;
 	}
 
@@ -47,8 +47,9 @@ public class BookManagement implements LibraryConstants {
 	public ArrayList<Book> search(String param) {
 		ArrayList<Book> list = new ArrayList<Book>();
 		try{
+			Connection conn = getConnection();
 			String sql = "SELECT * FROM Books " + param;
-			PreparedStatement st = new PreparedStatement(sql);
+			PreparedStatement st = conn.prepareStatement(sql);
 			ResultSet rs = st.executeQuery();
 			while(rs.next()){
 				Book result = new Book();
@@ -100,9 +101,15 @@ public class BookManagement implements LibraryConstants {
 		return "WHERE Hold = " + book.getHold();
 	}
 
+	public String byNotHold(){
+		return "WHERE NOT Hold = " + book.getHold();
+	}
+
 	public String byPin(){
 		return "WHERE PIN_Code = " + book.getPin();
 	}
+
+
 
 	public Connection getConnection(){
 		try{
@@ -114,8 +121,23 @@ public class BookManagement implements LibraryConstants {
 		}
 	}
 
-	public void update() {
-
+	public void update(Book b) {
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "UPDATE Books SET ISBN = ?, Author_FName = ?, Author_LName = ?, Title = ?, Genre = ?, ReleaseYear = ?, Hold = ? WHERE ID = "+ b.getId();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1,b.getIsbn());
+			st.setString(2, b.getAuthorFirstName());
+			st.setString(3, b.getAuthorLastName());
+			st.setString(4, b.getTitle());
+			st.setString(5, b.getGenre());
+			st.setString(6, b.getReleaseYear());
+			st.setString(7, b.getHold());
+			st.executeUpdate();
+			
+		} catch(Exception e){
+			System.out.print(e);
+		} 	
 	}
 
 	public void delete(String param) {
@@ -134,13 +156,26 @@ public class BookManagement implements LibraryConstants {
 	
 	//is this the right place for it?
 	public ArrayList<Book> returnCheckedOutBooks(String pin){
-			book.setPin(pin);
-			return search(byPin());
-				
+		book.setPin(pin);
+		ArrayList<Book> list = new ArrayList<Book>();
+		list = search(byPin());
+		/*foreach(Book result: list){
+			result.setPin(" ");
+			update(result);
+		} */
+		for(int i = 0; i<list.size(); i++){
+			Book b = list.get(i);
+			b.setPin(" ");
+			update(b);			
+		}
+		return list;
 	}
-	
-	
 
-
+	public ArrayList<Book> returnBooksOnHoldReadyForCheckout(){
+		ArrayList<Book> list = new ArrayList<Book>();
+		book = new Book();
+		list = search(byPin() + " AND " + byNotHold());
+		return list;
+	}
 
 }
