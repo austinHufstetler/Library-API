@@ -7,15 +7,14 @@ import common.*;
 import libraryutils.Connect;
 
 public class Book extends LibraryObject{
-	String isbn;
-	String authorFirstName;
-	String authorLastName;
-	String title;
-	String genre;
-	String releaseYear;
-	String hold;
-	String pin;
-	String daysCheckedOut;
+	String isbn = "";
+	String authorFirstName = "";
+	String authorLastName = "";
+	String title = "";
+	String genre = "";
+	String releaseYear = "";
+	String hold = "";
+	String pin = "";
 
 	//Basic Book constructor
 	public Book(){
@@ -95,13 +94,6 @@ public class Book extends LibraryObject{
 		this.hold = hold;
 	}
 
-	public String getDaysCheckedOut() {
-		return daysCheckedOut;
-	}
-
-	public void setDaysCheckedOut(String daysCheckedOut) {
-		this.daysCheckedOut = daysCheckedOut;
-	}
 	
 	/*old way, may be useful in future
 	public static void holdBook(char searchBy, String search, String pin){
@@ -200,6 +192,4 @@ public class Book extends LibraryObject{
 		    	return false;
 		    }	
 	}
-	
-
 }
