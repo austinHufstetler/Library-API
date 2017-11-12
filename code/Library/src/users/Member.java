@@ -55,6 +55,10 @@ public class Member extends User {
 		FineManagement.payFines(this.username, amount);
 	}
 	
+	public void deleteAccount(){
+		UserManagement.deleteMember(this.username);
+	}
+	
 
 	
 	

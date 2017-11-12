@@ -10,14 +10,18 @@ public class Manager extends Employee {
 	}
 	
 	//action methods
-	private static void suspendAccount(Member m){
-		
+	public void suspendAccount(String username){
 		//add "suspended" into member database
-		
+		UserManagement.suspendMember(username);
 	}
 	
-	private static void assessOverdueCharges(){
-		
+	public void unsuspendAccount(String username){
+		//add "suspended" into member database
+		UserManagement.unsuspendMember(username);
+	}
+	
+	public double assessOverdueCharges(String username){
+		return FineManagement.getFines(username);
 	}
 	
 	private static void addBook(){
@@ -33,37 +37,44 @@ public class Manager extends Employee {
 		
 	}
 	
-	private static void removeBook(){
-		
+	private static void removeBook(int id){
+		//remove book
 	}
 	
 	
 	private static void removeBooks(int...id){
-		
+		if(id.length == 0){
+			
+		}
+		else{
+			for(int i : id){
+				//remove books
+			}
+		}
 	}
 	
-	private static void addManager(){
-		
+	public void addManager(Manager m){
+		UserManagement.createManager(m);
 	}
 	
-	private static void removeManager(){
-		
+	public void removeManager(String username){
+		UserManagement.deleteManager(username);
 	}
 	
 	private static void editManager(){
 		
 	}
 	
-	private static void addAssociate(){
-		
+	public void addAssociate(Associate a){
+		UserManagement.createAssociate(a);
 	}
 	
-	private static void removeAssociate(){
-		
+	public void removeAssociate(String username){
+		UserManagement.deleteAssociate(username);
 	}
 	
 	private static void editAssociate(){
-		
+
 	}
 	
 	
