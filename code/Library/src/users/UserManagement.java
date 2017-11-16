@@ -48,8 +48,12 @@ public class UserManagement {
 			String fname = rs.getString("FName");
 			String lname= rs.getString("LName");
 			String uname = rs.getString("Username");
+			String pin = rs.getString("PIN_Code");
 			String password =  rs.getString("Password");
-			return String.format("ID= %d\nName= %s %s\nUsername= %s\nPassword= %s\n", id,fname,lname,uname,password);
+			String suspendedStatus = rs.getString("Suspended");
+			double fees = rs.getDouble("Fees");
+			int numBooks = rs.getInt("NumberOfBooks");
+			return String.format("ID= %d\nName= %s %s\nUsername= %s\nPassword= %s\nPin= %s\nSuspended= %s\nFees= %f\nNumber of Books= %d\n", id,fname,lname,uname,password,pin,suspendedStatus,fees,numBooks);
 		    } catch(Exception e){
 		    	return "User doesn't exist";
 		    }
@@ -274,29 +278,6 @@ public class UserManagement {
 		} 			
 	}
 	
-	public static void suspendMember(String username){
-		try{
-			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Members SET Suspended = True WHERE Username = ?";
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, username);
-			st.executeUpdate();
-		} catch(Exception e){
-			System.out.print(e);
-		} 		
-	}
-	
-	public static void unsuspendMember(String username){
-		try{
-			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Members SET Suspended = False WHERE Username = ?";
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, username);
-			st.executeUpdate();
-		} catch(Exception e){
-			System.out.print(e);
-		} 		
-	}
 	
 	
 	public static String generatePINCode() {

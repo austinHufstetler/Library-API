@@ -10,14 +10,14 @@ public class Manager extends Employee {
 	}
 	
 	//action methods
-	public void suspendAccount(String username){
+	public void suspendAccount(String username, int reason){
 		//add "suspended" into member database
-		UserManagement.suspendMember(username);
+		SuspensionManagement.suspendMember(username, reason);
 	}
 	
 	public void unsuspendAccount(String username){
 		//add "suspended" into member database
-		UserManagement.unsuspendMember(username);
+		SuspensionManagement.unsuspendMember(username);
 	}
 	
 	public double assessOverdueCharges(String username){
