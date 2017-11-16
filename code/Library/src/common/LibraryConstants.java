@@ -25,4 +25,9 @@ public interface LibraryConstants {
 	
 	//How long member can keep a book, in days
 	final int CHECKOUT_PERIOD = 14;
+	
+	//reasons for suspension
+	final int NOT_SUSPENDED = 0;
+	final int SUSPENDED_FINES = 1;
+	final int SUSPENDED_OTHER = 2;
 }

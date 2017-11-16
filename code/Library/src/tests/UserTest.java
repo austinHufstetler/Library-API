@@ -87,7 +87,12 @@ public class UserTest {
 		//UserManagement.suspendMember("dpickle");
 		
 		//Test 15. unsuspend Member
-		UserManagement.unsuspendMember("dpickle");
+		//UserManagement.unsuspendMember("dpickle");
+		
+		//Test 16. Read
+		//System.out.println(UserManagement.readMember("dpickle"));
+		
+
 		
 
 		
