@@ -73,6 +73,41 @@ public class BookManagement implements LibraryConstants {
 		}
 	}
 	
+	//searches by common fields that normal users would search by
+	public static ArrayList<Book> standardSearch(String search) {
+		ArrayList<Book> list = new ArrayList<Book>();
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "SELECT * FROM Books WHERE UPPER(ISBN) LIKE UPPER(?) OR UPPER(Author_FName) LIKE UPPER(?) OR UPPER(Author_LName) LIKE UPPER(?) OR UPPER(Title) LIKE UPPER(?)";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, "%" +search + "%" );
+			st.setString(2, "%" +search + "%" );
+			st.setString(3, "%" +search + "%" );
+			st.setString(4, "%" +search + "%" );
+			ResultSet rs = st.executeQuery();
+			while(rs.next()){
+				Book result = new Book();
+				result.setId(rs.getInt("ID"));
+				result.setIsbn(rs.getString("ISBN"));
+				result.setAuthorFirstName(rs.getString("Author_FName"));
+				result.setAuthorLastName(rs.getString("Author_LName"));
+				result.setTitle(rs.getString("Title"));
+				result.setGenre(rs.getString("Genre"));
+				result.setReleaseYear(rs.getString("ReleaseYear"));
+				result.setHold(rs.getString("Hold"));
+				result.setPin(rs.getString("PIN_Code"));
+				list.add(result);
+			}
+
+			return list;
+
+		} catch(Exception e){
+			System.out.print(e);
+			return null;
+		}
+	}
+	
+	
 	public String byId(){
 		return "WHERE ID = " + book.getId();
 	}
@@ -169,6 +204,22 @@ public class BookManagement implements LibraryConstants {
 			update(b);			
 		}
 		return list;
+	}
+	
+	public void returnBooks(ArrayList<Book> list, String pin){
+		Book b;
+		for(int i=0; i<list.size(); i++){
+			b = list.get(i);
+			b.setPin(" ");
+			update(b);
+			if(b.getHold().trim() != ""){
+				//alertHeldBook();
+			}
+		}
+	}
+	
+	public void alertHeldBook(){
+		
 	}
 
 	public ArrayList<Book> returnBooksOnHoldReadyForCheckout(){
