@@ -7,6 +7,7 @@ import users.UserManagement;
 
 public class Simulation {
 
+	
 	public static void memberSimulation(Member m1, Scanner scan){
 		boolean keepGoing = true;
 		while(keepGoing) {
