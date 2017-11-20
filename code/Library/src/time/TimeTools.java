@@ -2,6 +2,7 @@ package time;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TimeTools {
@@ -21,6 +22,15 @@ public class TimeTools {
 			return null;
 		}
 		return d;
+	}
+	
+	public static String getCurrentDate(){
+		Calendar now = Calendar.getInstance();
+		int year = now.get(Calendar.YEAR);
+		int month = now.get(Calendar.MONTH) + 1;
+		int day = now.get(Calendar.DAY_OF_MONTH);
+		String current = year +"-" + month +"-" + day;
+		return current;
 	}
 	
 }

@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import books.Book;
+import time.TimeTools;
 import books.*;
 
 public class BookTest {
@@ -18,12 +19,15 @@ public class BookTest {
 		Book testBook = manager.search(book);
 		System.out.print(testBook.getIsbn() == "test");
 		manager.delete(book); */
-		/*
+		
 		//1. checkout book
 		Book b1 = new Book("123456","John","Adams", "Declaration of Indepedence", "romance", "1776", "0");
-		b1.setId(6);
-		b1.holdBook("90909");
+		b1.setId(8);
+		b1.checkoutBook("90909");
+		//b1.holdBook("90909");
+		//System.out.println(TimeTools.getCurrentDate().toString());
 		//2. hold book
+		/*
 		Book b2 = new Book("123456","John","Adams", "Declaration of Indepedence", "romance", "1776", "0");
 		b1.setId(3);
 		b1.checkoutBook("80808");
@@ -44,11 +48,13 @@ public class BookTest {
 		*/
 		
 		//Test 3. Display CheckedoutBooks
+		/*
 		BookManagement b1 = new BookManagement(new Book());
 		ArrayList<Book> checkedout = b1.returnCheckedOutBooks("10101");
 		for(int i=0; i<checkedout.size(); i++){
 				System.out.println(checkedout.get(i).getTitle());
 			}
 			System.out.println();
+	} */
 	}
 }

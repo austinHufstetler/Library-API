@@ -22,7 +22,7 @@ public class TimeTest {
 		//System.out.println(TimeManagement.updateBookTimes());
 		
 		//3. Update fees everyday, false if failed, true if success
-		System.out.println(TimeManagement.updateFines());
+		//System.out.println(TimeManagement.updateFines());
 	}
 
 }

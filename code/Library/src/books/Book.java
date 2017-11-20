@@ -2,9 +2,11 @@ package books;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import common.LibraryConstants;
 
 import common.*;
 import libraryutils.Connect;
+import time.TimeTools;
 
 public class Book extends LibraryObject{
 	String isbn = "";
@@ -160,9 +162,12 @@ public class Book extends LibraryObject{
 		if(this.isAvailableCheckout()) {
 			try{
 				Connection conn = Connect.getConnection();
-				String sql = "UPDATE Books SET PIN_Code= ? WHERE ID= " + this.getId();
+				String sql = "UPDATE Books SET PIN_Code= ?, DateStartCheckedOut = ? WHERE ID= " + this.getId();
 				PreparedStatement st = conn.prepareStatement(sql);
 				st.setString(1, pin);
+				st.setDate(2, java.sql.Date.valueOf(TimeTools.getCurrentDate()));
+				//st.setString(2, TimeTools.getCurrentDate().toString());
+				//st.setString(2, "'20100301'");
 				st.executeUpdate();
 			} catch(Exception e){
 				System.out.print(e);
@@ -191,6 +196,10 @@ public class Book extends LibraryObject{
 		    	System.out.println(e);
 		    	return false;
 		    }	
+	}
+	
+	public void renewBook(){
+		
 	}
 	
 }

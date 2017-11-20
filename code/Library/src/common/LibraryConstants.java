@@ -30,4 +30,7 @@ public interface LibraryConstants {
 	final int NOT_SUSPENDED = 0;
 	final int SUSPENDED_FINES = 1;
 	final int SUSPENDED_OTHER = 2;
+	
+	//field names for books
+	final String DATE_CHECKED_OUT = "DateStartCheckedOut";
 }

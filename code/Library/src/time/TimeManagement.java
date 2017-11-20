@@ -10,10 +10,11 @@ import libraryutils.Connect;
 public class TimeManagement implements LibraryConstants{
 	
 	public static void newDay(){
-		updateBookTimes();
-		updateFines();
+		//updateBookTimes();
+		//updateFines();
 	}
 
+	/* wont work with new way
 	public static boolean updateBookTimes(){
 		try{
 			Connection conn = Connect.getConnection();
@@ -34,7 +35,9 @@ public class TimeManagement implements LibraryConstants{
 		    }			
 		return true;
 	}
+	*/
 	
+	/* doesn't work with new way of doing it
 	public static boolean updateFines(){
 		try{
 			Connection conn = Connect.getConnection();
@@ -63,5 +66,6 @@ public class TimeManagement implements LibraryConstants{
 		    }			
 		return true;
 	}
+	*/
 	
 }
