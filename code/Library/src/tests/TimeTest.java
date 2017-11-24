@@ -23,6 +23,11 @@ public class TimeTest {
 		
 		//3. Update fees everyday, false if failed, true if success
 		//System.out.println(TimeManagement.updateFines());
+		
+		//4. get days checkedout, useful for checking return etc
+		System.out.println(TimeTools.getDaysCheckedOut(8));
+		System.out.println(TimeTools.getCurrentDate());
+		System.out.println(TimeTools.convertDate(TimeTools.getCurrentDate()));
 	}
 
 }

@@ -5,11 +5,9 @@
 <fullyQualifiedTypeName name="users.UserManagement"/>
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
 <fullyQualifiedTypeName name="users.FineManagement"/>
-<fullyQualifiedTypeName name="time.TimeTools"/>
 <fullyQualifiedTypeName name="java.text.DateFormat"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="time.TimeManagement"/>
-<fullyQualifiedTypeName name="common.LibraryConstants"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="users.Authorization"/>
 <fullyQualifiedTypeName name="users.User"/>
@@ -20,4 +18,8 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.awt.print.Book"/>
 <fullyQualifiedTypeName name="books.Book"/>
+<fullyQualifiedTypeName name="common.LibraryConstants"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="time.TimeTools"/>
 </qualifiedTypeNameHistroy>

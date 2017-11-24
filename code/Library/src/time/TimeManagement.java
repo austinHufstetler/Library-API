@@ -68,4 +68,9 @@ public class TimeManagement implements LibraryConstants{
 	}
 	*/
 	
+	/*
+	public static Date getTime(){
+		
+	} */
+	
 }
