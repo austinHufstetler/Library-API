@@ -6,16 +6,40 @@ import java.sql.ResultSet;
 
 import common.LibraryConstants;
 import libraryutils.Connect;
+import users.FineManagement;
+import users.Member;
+import users.UserManagement;
 
 public class TimeManagement implements LibraryConstants{
 	
 	public static void newDay(){
 		//updateBookTimes();
-		//updateFines();
+		updateFines();
 	}
 	
-	private void updateFines(){
-		
+	
+	//NOT TESTED YET, NEEDS TO BE TESTED
+	private static void updateFines(){
+		try{
+			Connection conn = Connect.getConnection();
+			PreparedStatement gt = conn.prepareStatement("SELECT ID,PIN_Code FROM Books WHERE PIN_Code != ?");    
+			gt.setString(1, "0");
+			ResultSet rs = gt.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("ID");
+				String pin = rs.getString("PIN_Code");
+				if(TimeTools.getDaysCheckedOut(id) > LibraryConstants.CHECKOUT_PERIOD) {
+					//member whose fines are over the checkout period
+					Member violatingMember = UserManagement.getMemberByPin(pin);
+					//issues fines to that member
+					FineManagement.issueFines(violatingMember.getUsername(), LibraryConstants.LATE_FEE);
+				} //end of IF
+			}
+		} 
+		catch(Exception e){
+		    	System.out.print(e);
+		}			
+	
 	}
 	
 	private void updateHoldPickup(){

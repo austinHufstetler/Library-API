@@ -12,14 +12,18 @@
 <fullyQualifiedTypeName name="users.Authorization"/>
 <fullyQualifiedTypeName name="users.User"/>
 <fullyQualifiedTypeName name="libraryexceptions.InvalidUserException"/>
-<fullyQualifiedTypeName name="books.BookManagement"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="libraryutils.Connect"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.awt.print.Book"/>
-<fullyQualifiedTypeName name="books.Book"/>
-<fullyQualifiedTypeName name="common.LibraryConstants"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="time.TimeTools"/>
+<fullyQualifiedTypeName name="books.Book"/>
+<fullyQualifiedTypeName name="books.BookManagement"/>
+<fullyQualifiedTypeName name="books.BookTools"/>
+<fullyQualifiedTypeName name="books.BookSearch"/>
+<fullyQualifiedTypeName name="common.LibraryConstants"/>
+<fullyQualifiedTypeName name="users.UserSearch"/>
+<fullyQualifiedTypeName name="users.Manager"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
