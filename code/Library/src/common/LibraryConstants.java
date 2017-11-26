@@ -33,4 +33,19 @@ public interface LibraryConstants {
 	
 	//field names for books
 	final String DATE_CHECKED_OUT = "DateStartCheckedOut";
+	
+	//field names for Members
+	final String ID = "ID";
+	final String FIRST_NAME = "FName";
+	final String LAST_NAME = "LName";
+	final String USERNAME = "Username";
+	final String PASSWORD = "Password";
+	final String ADDRESS = "Address";
+	final String SUSPENDED = "Suspended";
+	final String SUSPENSION_REASON = "Suspension_Reason";
+	final String FEES= "Fees";
+	final String PIN_CODE = "PIN_Code";
+	
+	
+	
 }

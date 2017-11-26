@@ -2,7 +2,11 @@ package users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.Random;
+
+import books.Book;
+import books.BookTools;
 import libraryutils.Connect;
 
 public class Member extends User {
@@ -18,6 +22,7 @@ public class Member extends User {
 		super(firstName, lastName, "member", username, password, pin);
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	//getters and setters
 	public String getPin() {
@@ -30,17 +35,17 @@ public class Member extends User {
 	
 	//actions methods
 	
-	private static void renewBook(){
+	public void renewBook(Book book){
+		book.renewBook(this.pin);
+	}
+	
+	public void reportLostBook(Book book){
 		
 	}
 	
-	private static void reportLostBook(){
-		
-	}
 	
-	
-	private static void displayCheckedOutBooks(){
-		
+	public ArrayList<Book> getCheckedOutBooks(){
+		return BookTools.getCheckedOutBooks(this.pin);
 	}
 	
 	public void displayFines(){

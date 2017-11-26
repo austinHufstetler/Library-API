@@ -2,6 +2,8 @@ package users;
 
 import java.sql.*;
 import java.util.Random;
+
+import common.LibraryConstants;
 import libraryutils.Connect;
 
 public class UserManagement {
@@ -75,7 +77,9 @@ public class UserManagement {
 			String password =  rs.getString("Password");
 			String pincode =  rs.getString("PIN_Code");
 			System.out.println("you have gotten a member");
-			return new Member(fname,lname,uname,password,pincode);
+			Member m = new Member(fname,lname,uname,password,pincode);
+			m.setId(id);
+			return m;
 		    } catch(Exception e){
 		    	System.out.println(e);
 		    	return null;

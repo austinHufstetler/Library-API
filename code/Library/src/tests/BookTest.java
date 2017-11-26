@@ -21,9 +21,9 @@ public class BookTest {
 		manager.delete(book); */
 		
 		//1. checkout book
-		Book b1 = new Book("123456","John","Adams", "Declaration of Indepedence", "romance", "1776", "0");
-		b1.setId(8);
-		b1.checkoutBook("90909");
+		//Book b1 = new Book("123456","John","Adams", "Declaration of Indepedence", "romance", "1776", "0");
+		//b1.setId(8);
+		//b1.checkoutBook("90909");
 		//b1.holdBook("90909");
 		//System.out.println(TimeTools.getCurrentDate().toString());
 		//2. hold book
@@ -56,5 +56,10 @@ public class BookTest {
 			}
 			System.out.println();
 	} */
+		
+	//Test 4. Check if book is new
+	Book b1 = BookManagement.getBook(8);
+	System.out.println(b1.isNew());
+	
 	}
 }

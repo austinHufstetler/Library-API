@@ -1,5 +1,7 @@
 package users;
 
+import java.util.ArrayList;
+
 import books.Book;
 
 public class Manager extends Employee {
@@ -75,6 +77,10 @@ public class Manager extends Employee {
 	
 	private static void editAssociate(){
 
+	}
+
+	public ArrayList<Member> memberSearch(String search) {
+		return UserSearch.memberSearch(search);
 	}
 	
 	
