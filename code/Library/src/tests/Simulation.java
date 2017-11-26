@@ -17,7 +17,7 @@ public class Simulation {
 			int choice = scan.nextInt();
 			switch(choice){
 				case 1: 
-					((Member) m1).displayFines();
+					System.out.println(m1.getFines());
 					break;
 				case 2: 
 					System.out.println("Payment: ");
@@ -25,10 +25,10 @@ public class Simulation {
 					((Member) m1).payFines(amount);
 					break;
 				case 3: 
-					System.out.println(UserManagement.readMember(m1.getUsername()));
+					System.out.println(m1.getInfo());
 					break;
 				case 4:
-					System.out.println(((Member) m1).getCheckedOutBooks());
+					System.out.println(m1.getCheckedOutBooks());
 					break;
 				case 10:
 					System.out.println("Goodbye");
@@ -76,7 +76,7 @@ public class Simulation {
 			int choice = scan.nextInt();
 			switch(choice){
 				case 1: 
-					((Member) m1).displayFines();
+					
 					break;
 				case 2: 
 					System.out.println("Payment: ");

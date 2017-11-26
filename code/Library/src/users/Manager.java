@@ -3,6 +3,7 @@ package users;
 import java.util.ArrayList;
 
 import books.Book;
+import time.TimeManagement;
 
 public class Manager extends Employee {
 	
@@ -26,6 +27,11 @@ public class Manager extends Employee {
 		return FineManagement.getFines(username);
 	}
 	
+	public void newDay(){
+		TimeManagement.newDay();
+	}
+	
+	//BOOKS
 	private static void addBook(){
 		
 	}
@@ -55,6 +61,8 @@ public class Manager extends Employee {
 		}
 	}
 	
+	
+	//MANAGERS
 	public void addManager(Manager m){
 		UserManagement.createManager(m);
 	}
@@ -67,6 +75,7 @@ public class Manager extends Employee {
 		
 	}
 	
+	//ASSOCIATES
 	public void addAssociate(Associate a){
 		UserManagement.createAssociate(a);
 	}
@@ -79,6 +88,7 @@ public class Manager extends Employee {
 
 	}
 
+	//SEARCHES
 	public ArrayList<Member> memberSearch(String search) {
 		return UserSearch.memberSearch(search);
 	}

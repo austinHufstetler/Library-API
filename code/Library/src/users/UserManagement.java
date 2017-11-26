@@ -36,9 +36,7 @@ public class UserManagement {
 		} 
 	}
 	
-	
-	//changes return type to string later, void is for testing
-	public static String readMember(String username){
+	public static Member getMember(String username){
 		try{
 			Connection conn = Connect.getConnection();
 			
@@ -50,24 +48,24 @@ public class UserManagement {
 			String fname = rs.getString("FName");
 			String lname= rs.getString("LName");
 			String uname = rs.getString("Username");
-			String pin = rs.getString("PIN_Code");
 			String password =  rs.getString("Password");
-			String suspendedStatus = rs.getString("Suspended");
-			double fees = rs.getDouble("Fees");
-			int numBooks = rs.getInt("NumberOfBooks");
-			return String.format("ID= %d\nName= %s %s\nUsername= %s\nPassword= %s\nPin= %s\nSuspended= %s\nFees= %f\nNumber of Books= %d\n", id,fname,lname,uname,password,pin,suspendedStatus,fees,numBooks);
+			String pincode =  rs.getString("PIN_Code");
+			System.out.println("you have gotten a member");
+			Member m = new Member(fname,lname,uname,password,pincode);
+			m.setId(id);
+			return m;
 		    } catch(Exception e){
-		    	return "User doesn't exist";
-		    }
-		
+		    	System.out.println(e);
+		    	return null;
+		    }		
 	}
 	
-	public static Member getMember(String username){
+	public static Member getMemberByPin(String pin){
 		try{
 			Connection conn = Connect.getConnection();
 			
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE Username = ?");    
-			st.setString(1, username);    
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE PIN_Code = ?");    
+			st.setString(1, pin);    
 			ResultSet rs = st.executeQuery();
 			rs.next();
 			int id = rs.getInt("ID");
@@ -130,25 +128,6 @@ public class UserManagement {
 		} catch(Exception e){
 			System.out.print(e);
 		} 	
-	}
-	
-	public static String readManager(String username){
-		try{
-			Connection conn = Connect.getConnection();
-			
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ?");    
-			st.setString(1, username);    
-			ResultSet rs = st.executeQuery();
-			rs.next();
-			int id = rs.getInt("ID");
-			String fname = rs.getString("FName");
-			String lname= rs.getString("LName");
-			String uname = rs.getString("Username");
-			String password =  rs.getString("Password");
-			return String.format("ID= %d\nName= %s %s\nUsername= %s\nPassword= %s\n", id,fname,lname,uname,password);
-		    } catch(Exception e){
-		    	return "User doesn't exist";
-		    }		
 	}
 	
 	public static Manager getManager(String username){
@@ -216,26 +195,6 @@ public class UserManagement {
 		} 			
 	}
 	
-	public static String readAssociate(String username){
-		try{
-			Connection conn = Connect.getConnection();
-			
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE Username = ?");    
-			st.setString(1, username);    
-			ResultSet rs = st.executeQuery();
-			rs.next();
-			int id = rs.getInt("ID");
-			String fname = rs.getString("FName");
-			String lname= rs.getString("LName");
-			String uname = rs.getString("Username");
-			String password =  rs.getString("Password");
-			return String.format("ID= %d\nName= %s %s\nUsername= %s\nPassword= %s\n", id,fname,lname,uname,password);
-		    } catch(Exception e){
-		    	System.out.print(e);
-		    	return "User doesn't exist";
-		    }		
-	}
-	
 	public static Associate getAssociate(String username){
 		try{
 			Connection conn = Connect.getConnection();
@@ -282,25 +241,11 @@ public class UserManagement {
 		} 			
 	}
 	
-	
-	
 	public static String generatePINCode() {
 		Random rand = new Random();
-		int pin = rand.nextInt(89999)+10000;
+		int pin = rand.nextInt(8999)+1000;
 		return "" + pin;
 	}
 	
-	//delete from this class later, added to Member class
-	/*public static void checkoutBook(String isbn, String pin){
-		try{
-			Connection conn = getConnection();
-			String sql = "UPDATE Books SET PIN_Code= ? WHERE ISBN = " + isbn;
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, pin);
-			st.executeUpdate();
-		} catch(Exception e){
-			System.out.print(e);
-		} 			
-	}*/
 	
 }

@@ -7,6 +7,7 @@ import common.LibraryConstants;
 import libraryutils.Connect;
 
 public class SuspensionManagement {
+	
 	public static void suspendMember(String username, int reason){
 		try{
 			Connection conn = Connect.getConnection();

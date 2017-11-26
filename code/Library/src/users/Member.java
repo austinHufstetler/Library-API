@@ -43,16 +43,15 @@ public class Member extends User {
 		
 	}
 	
-	
 	public ArrayList<Book> getCheckedOutBooks(){
 		return BookTools.getCheckedOutBooks(this.pin);
 	}
 	
-	public void displayFines(){
-		System.out.println(returnFines());
+	public String getInfo(){
+		return String.format("%10s%15s\n%10s%15s\n%10s%15s\n","Name: ",this.firstName + " " + this.lastName, "Pin Code: ", this.pin, "Username: ", this.username);
 	}
 	
-	public double returnFines(){
+	public double getFines(){
 		return FineManagement.getFines(this.username);
 	}
 	
