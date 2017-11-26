@@ -38,6 +38,11 @@ public class TimeTools {
 		return current;
 	}
 	
+	public static int getCurrentYear(){
+		Calendar now = Calendar.getInstance();
+		return now.get(Calendar.YEAR);
+	}
+	
 	public static int getDaysCheckedOut(int book_id){
 			try{
 				Connection conn = Connect.getConnection();

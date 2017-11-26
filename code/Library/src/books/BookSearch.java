@@ -1,26 +1,21 @@
 package books;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import books.Book;
-import common.LibraryConstants;
 import libraryutils.Connect;
-import users.Associate;
-import users.Member;
 
-public class BookManagement implements LibraryConstants {
-
-	/////////////////////////
-	//SEARCH NEEDS TO BE REMOVED FROM THIS CLASS
-	////////////////////////
+public class BookSearch {
 	
+	//all search methods need to go here
 	Book book = new Book();
 
-	public BookManagement(Book book){
+	public BookSearch(Book book){
 		this.book = book;
 	}
-
+	
 	public Book getBook(){
 		return this.book;
 	}
@@ -33,7 +28,7 @@ public class BookManagement implements LibraryConstants {
 		try{
 			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
 			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "INSERT INTO Books ([ISBN],[Author_FName],[Author_LName],[Title],[Genre],[ReleaseYear],[Hold]) VALUES(?,?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1,book.getIsbn());
@@ -52,7 +47,7 @@ public class BookManagement implements LibraryConstants {
 	public ArrayList<Book> search(String param) {
 		ArrayList<Book> list = new ArrayList<Book>();
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "SELECT * FROM Books " + param;
 			PreparedStatement st = conn.prepareStatement(sql);
 			ResultSet rs = st.executeQuery();
@@ -83,12 +78,20 @@ public class BookManagement implements LibraryConstants {
 		ArrayList<Book> list = new ArrayList<Book>();
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "SELECT * FROM Books WHERE UPPER(ISBN) LIKE UPPER(?) OR UPPER(Author_FName) LIKE UPPER(?) OR UPPER(Author_LName) LIKE UPPER(?) OR UPPER(Title) LIKE UPPER(?)";
+			String sql = "SELECT * FROM Books WHERE "
+					+ "UPPER(ISBN) LIKE UPPER(?) "
+					+ "OR UPPER(Author_FName) LIKE UPPER(?) "
+					+ "OR UPPER(Author_LName) LIKE UPPER(?) "
+					+ "OR UPPER(Title) LIKE UPPER(?) "
+					+ "OR UPPER(Genre) LIKE UPPER(?) "
+					+ "OR UPPER(ReleaseYear) LIKE UPPER(?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, "%" +search + "%" );
 			st.setString(2, "%" +search + "%" );
 			st.setString(3, "%" +search + "%" );
 			st.setString(4, "%" +search + "%" );
+			st.setString(5, "%" +search + "%" );
+			st.setString(6, "%" +search + "%" );
 			ResultSet rs = st.executeQuery();
 			while(rs.next()){
 				Book result = new Book();
@@ -107,7 +110,7 @@ public class BookManagement implements LibraryConstants {
 			return list;
 
 		} catch(Exception e){
-			System.out.print(e);
+			e.printStackTrace(System.out);
 			return null;
 		}
 	}
@@ -148,76 +151,4 @@ public class BookManagement implements LibraryConstants {
 	public String byPin(){
 		return "WHERE PIN_Code = " + book.getPin();
 	}
-
-
-
-	public Connection getConnection(){
-		try{
-			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/gitclipse/group1/Library_DB.accdb");
-			return conn;
-		}catch(Exception e){
-			System.out.print(e);
-			return null;
-		}
-	}
-
-	public void update(Book b) {
-		try{
-			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Books SET ISBN = ?, Author_FName = ?, Author_LName = ?, Title = ?, Genre = ?, ReleaseYear = ?, Hold = ? WHERE ID = "+ b.getId();
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1,b.getIsbn());
-			st.setString(2, b.getAuthorFirstName());
-			st.setString(3, b.getAuthorLastName());
-			st.setString(4, b.getTitle());
-			st.setString(5, b.getGenre());
-			st.setString(6, b.getReleaseYear());
-			st.setString(7, b.getHold());
-			st.executeUpdate();
-			
-		} catch(Exception e){
-			System.out.print(e);
-		} 	
-	}
-
-	public void delete(String param) {
-		try{
-			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
-			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
-			Connection conn = getConnection();
-			String sql = "DELETE FROM Books " + param;
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, book.getTitle());
-			st.execute();
-		} catch(Exception e){
-			e.printStackTrace(System.out);
-		}
-	}
-	
-	public static Book getBook(int book_id){
-		try{
-			Connection conn = Connect.getConnection();
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM Books WHERE ID = ?");    
-			st.setString(1, book_id+"");    
-			ResultSet rs = st.executeQuery();
-			rs.next();
-			Book b = new Book();
-			b.setId(book_id);
-			b.setReleaseYear(rs.getString("ReleaseYear"));
-			b.setAuthorFirstName(rs.getString("Author_FName"));
-			b.setAuthorLastName(rs.getString("Author_LName"));
-			b.setTitle(rs.getString("Title"));
-			b.setGenre(rs.getString("Genre"));
-			b.setIsbn(rs.getString("ISBN"));
-			b.setHold(rs.getString("Hold"));
-			b.setPin(rs.getString("PIN_Code"));
-			return b;
-		    } catch(Exception e){
-		    	e.printStackTrace(System.out);
-		    	return null;
-		    }		
-	}
-	
-
-
 }

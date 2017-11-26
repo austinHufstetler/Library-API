@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import books.Book;
 import books.BookManagement;
+import books.BookSearch;
 import users.Associate;
 import users.Authorization;
 import users.Manager;
@@ -29,7 +30,7 @@ public class IntegrationTesting {
 						System.out.print("\n Password: ");
 						String password = scan.next();
 						System.out.println();
-						if(Authorization.authorizeMember(username, password)) {
+						if(Authorization.authorizeUser(username, password)) {
 							try {
 								User m1 = Authorization.login(username, password);
 								System.out.println("Welcome " + m1.getFirstName() + "!\n");
@@ -40,7 +41,7 @@ public class IntegrationTesting {
 									Simulation.memberSimulation((Member)m1, scan);
 								}
 								if(m1 instanceof Manager){
-									Simulation.userSimulation((Member)m1, scan);
+									Simulation.managerSimulation((Manager)m1, scan);
 								}
 								if(m1 instanceof Associate){
 									Simulation.userSimulation((Member)m1, scan);
@@ -56,7 +57,7 @@ public class IntegrationTesting {
 						System.out.println("Please enter search criteria: ");
 						scan.nextLine();
 						String searchBy = scan.nextLine();
-						ArrayList<Book> list = BookManagement.standardSearch(searchBy);
+						ArrayList<Book> list = BookSearch.standardSearch(searchBy);
 						for(int i=0; i<list.size(); i++){
 							System.out.println( "BOOK ID = " + list.get(i).getId() + " - " + list.get(i).getAuthorFirstName() + " " + list.get(i).getAuthorLastName() + " - " + list.get(i).getTitle());
 						}

@@ -13,6 +13,15 @@ public class TimeManagement implements LibraryConstants{
 		//updateBookTimes();
 		//updateFines();
 	}
+	
+	private void updateFines(){
+		
+	}
+	
+	private void updateHoldPickup(){
+		
+	}
+	
 
 	/* wont work with new way
 	public static boolean updateBookTimes(){

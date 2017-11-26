@@ -178,6 +178,8 @@ public class Book extends LibraryObject{
 		}
 	}
 	
+	
+	
 	public boolean isAvailableCheckout(){
 		try{
 			Connection conn = Connect.getConnection();
@@ -198,8 +200,45 @@ public class Book extends LibraryObject{
 		    }	
 	}
 	
-	public void renewBook(){
-		
+	//NEEDS TO BE TESTED
+	public boolean isNew(){
+		try{
+			Connection conn = Connect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement("SELECT ReleaseYear FROM Books WHERE ID = "+this.getId());     
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String release = rs.getString("ReleaseYear");
+			int releaseYear = Integer.parseInt(release);
+			int currentYear = TimeTools.getCurrentYear();
+			if(currentYear - releaseYear <= 1){
+				return true;
+			}
+			else{
+				return false;
+			}
+		    } catch(Exception e){
+		    	System.out.println(e);
+		    	return false;
+		    }			
+	}
+	
+	//THIS IS NOT FINISHED, NEEDS TO DEAL WITH UPDATING WHEN 2 WEEKS IS UP (THEY RENEW ON DAY SUPPOSE TO RETURN (or do we deal with that here)?
+	public void renewBook(String pin){
+		if(this.isAvailableHold() && this.isNew()) {
+			try{
+				Connection conn = Connect.getConnection();
+				String sql = "UPDATE Books SET Hold = ? WHERE ID= " + this.getId();
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setString(1, pin);
+				st.executeUpdate();
+			} catch(Exception e){
+				e.printStackTrace(System.out);
+			} 	
+		}
+		else{
+			System.out.println("This book is not available for renewal");
+		}		
 	}
 	
 }
