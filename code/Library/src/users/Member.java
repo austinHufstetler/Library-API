@@ -12,14 +12,15 @@ import libraryutils.Connect;
 public class Member extends User {
 
 	
-	public Member(String firstName, String lastName, String username, String password) {
-		super(firstName, lastName, "member", username, password);
+	public Member(String firstName, String lastName, String username, String password, String address, String phoneNumber) {
+		super(firstName, lastName, "member", username, password, address, phoneNumber);
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 	//constructor for already created members, used when getting back member objects
-	public Member(String firstName, String lastName, String username, String password, String pin) {
-		super(firstName, lastName, "member", username, password, pin);
+	public Member(String firstName, String lastName, String username, String password, String pin, String address, String phoneNumber) {
+		super(firstName, lastName, "member", username, password, address, phoneNumber, pin);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
+import common.LibraryConstants;
 import libraryutils.Connect;
 
 public class BookSearch {
@@ -14,6 +17,10 @@ public class BookSearch {
 
 	public BookSearch(Book book){
 		this.book = book;
+	}
+	
+	public BookSearch(){
+
 	}
 	
 	public Book getBook(){
@@ -43,6 +50,41 @@ public class BookSearch {
 			System.out.print(e);
 		}
 	}
+	
+	/*
+	public ArrayList<Book> search(String param) {
+		ArrayList<Book> list = new ArrayList<Book>();
+		try{
+			Connection conn = Connect.getConnection();
+			System.out.println(param);
+			//String sql = "SELECT * FROM Books " + param;
+			String sql = "SELECT * FROM Books ?";
+			
+			System.out.println(sql);
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			while(rs.next()){
+				Book result = new Book();
+				result.setId(rs.getInt("ID"));
+				result.setIsbn(rs.getString("ISBN"));
+				result.setAuthorFirstName(rs.getString("Author_FName"));
+				result.setAuthorLastName(rs.getString("Author_LName"));
+				result.setTitle(rs.getString("Title"));
+				result.setGenre(rs.getString("Genre"));
+				result.setReleaseYear(rs.getString("ReleaseYear"));
+				result.setHold(rs.getString("Hold"));
+				result.setPin(rs.getString("PIN_Code"));
+				list.add(result);
+			}
+
+			return list;
+
+		} catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	} */
+	
 	
 	public ArrayList<Book> search(String param) {
 		ArrayList<Book> list = new ArrayList<Book>();
@@ -74,7 +116,7 @@ public class BookSearch {
 	}
 	
 	//searches by common fields that normal users would search by
-	public static ArrayList<Book> standardSearch(String search) {
+	public ArrayList<Book> standardSearch(String search) {
 		ArrayList<Book> list = new ArrayList<Book>();
 		try{
 			Connection conn = Connect.getConnection();
@@ -115,6 +157,55 @@ public class BookSearch {
 		}
 	}
 	
+	/*
+	//TEST!
+	//SOMETHING LIKE THIS BUT REPEATS SHOULD BE REMOVED, AND POSSIBLY SORTED
+	public ArrayList<Book> customSearch(String ... param) {
+		ArrayList<Book> list = new ArrayList<Book>();
+		try{
+			for(String p: param) {
+				System.out.println("lol");
+				ArrayList<Book> books = search(p);
+				System.out.println("lol");
+				for(int i=0; i<books.size(); i++){
+					list.add(books.get(i));
+				}
+			}
+			//removes dups, hopefully
+			Set<Book> set = new HashSet<Book>(list);
+			list = new ArrayList<Book>(set);
+			return list;
+		} catch(Exception e){
+			System.out.print(e);
+			return null;
+		}
+	} */
+	
+	
+	//TEST!
+	//SOMETHING LIKE THIS BUT REPEATS SHOULD BE REMOVED, AND POSSIBLY SORTED
+	public ArrayList<Book> customSearch(int ... param) {
+		ArrayList<Book> list = new ArrayList<Book>();
+		try{
+			for(int p: param) {
+				ArrayList<Book> books = new ArrayList<Book>();
+				if(p == 1){
+					books = searchByAuthorFName();
+				}
+				for(int i=0; i<books.size(); i++){
+					list.add(books.get(i));
+				}
+			}
+			//removes dups, hopefully
+			Set<Book> set = new HashSet<Book>(list);
+			list = new ArrayList<Book>(set);
+			return list;
+		} catch(Exception e){
+			System.out.print(e);
+			return null;
+		}
+	} 
+	
 	
 	public String byId(){
 		return "WHERE ID = " + book.getId();
@@ -122,6 +213,7 @@ public class BookSearch {
 	
 	public String byTitle(){
 		return "WHERE Title = " + book.getTitle();
+		//return "WHERE UPPER(Title) LIKE UPPER(" + book.getTitle() + ")";
 	}
 
 	public String byISBN(){
@@ -150,5 +242,40 @@ public class BookSearch {
 
 	public String byPin(){
 		return "WHERE PIN_Code = " + book.getPin();
+	} 
+	
+	public ArrayList<Book> searchByAuthorFName(){
+		ArrayList<Book> list = new ArrayList<Book>();
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "SELECT * FROM Books WHERE " + LibraryConstants.AUTHOR_FIRST_NAME + " = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, book.authorFirstName);
+			ResultSet rs = st.executeQuery();
+			while(rs.next()){
+				Book result = new Book();
+				result.setId(rs.getInt("ID"));
+				result.setIsbn(rs.getString("ISBN"));
+				result.setAuthorFirstName(rs.getString("Author_FName"));
+				result.setAuthorLastName(rs.getString("Author_LName"));
+				result.setTitle(rs.getString("Title"));
+				result.setGenre(rs.getString("Genre"));
+				result.setReleaseYear(rs.getString("ReleaseYear"));
+				result.setHold(rs.getString("Hold"));
+				result.setPin(rs.getString("PIN_Code"));
+				list.add(result);
+			}
+
+			return list;
+
+		} catch(Exception e){
+			System.out.print(e);
+			return null;
+		}
 	}
+	
+
+	
+	
+
 }

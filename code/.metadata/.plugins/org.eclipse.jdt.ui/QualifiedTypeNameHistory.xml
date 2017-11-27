@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="users.Member"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="users.UserManagement"/>
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
-<fullyQualifiedTypeName name="users.FineManagement"/>
 <fullyQualifiedTypeName name="java.text.DateFormat"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-<fullyQualifiedTypeName name="time.TimeManagement"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="users.Authorization"/>
 <fullyQualifiedTypeName name="users.User"/>
@@ -26,4 +22,10 @@
 <fullyQualifiedTypeName name="users.UserSearch"/>
 <fullyQualifiedTypeName name="users.Manager"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="time.TimeManagement"/>
+<fullyQualifiedTypeName name="users.UserManagement"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Member"/>
+<fullyQualifiedTypeName name="users.Member"/>
+<fullyQualifiedTypeName name="users.FineManagement"/>
 </qualifiedTypeNameHistroy>

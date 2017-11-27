@@ -36,7 +36,7 @@ public class UserTest {
 		
 		//Test 5. Create Members
 		
-		//Member m1 = new Member("Janet","Jackson","jjackson","gemini98");
+		//Member m1 = new Member("Janet","Jac","jjackson","gemini98", "808 My House", "2299090222");
 		//UserManagement.createMember(m1); 
 		
 		//Test 6. Edit Members
@@ -92,7 +92,10 @@ public class UserTest {
 		//Test 16. Read
 		//System.out.println(UserManagement.readMember("dpickle"));
 		
-
+		//Test 17. New update
+		Member m2 = UserManagement.getMember("ldoe");
+		m2.setLastName("Lemon");
+		UserManagement.updateMember(m2, m2.getId());
 		
 
 		

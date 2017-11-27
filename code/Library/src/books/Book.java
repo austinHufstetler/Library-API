@@ -241,4 +241,18 @@ public class Book extends LibraryObject{
 		}		
 	}
 	
+	@Override
+	public boolean equals(Object o){
+		if(o == null){
+			return false;
+		}
+		if(!Book.class.isAssignableFrom(o.getClass())){
+			return false;
+		}
+		Book book = (Book)o;
+		if(this.getId() != book.getId()){
+			return false;
+		}
+		return true;
+	}
 }
