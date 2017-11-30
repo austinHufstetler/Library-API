@@ -4,7 +4,10 @@ import java.sql.*;
 import java.util.Random;
 
 import common.LibraryConstants;
+import libraryexceptions.DuplicatePinException;
+import libraryexceptions.UnavailableUsernameException;
 import libraryutils.Connect;
+import libraryutils.DuplicateChecker;
 
 public class UserManagement {
 
@@ -13,26 +16,30 @@ public class UserManagement {
 	///////////////////
 	public static void createMember(Member m){
 		try{
-			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
-			//String pin = m.pin;
+			if(DuplicateChecker.duplicateUsernameCheck(m.username)){
+				throw new UnavailableUsernameException("This username is taken");
+			}
+			if(DuplicateChecker.duplicatePinCheck(m.pin)){
+				throw new DuplicatePinException("This pin is a duplicate");
+			}
 			Connection conn = Connect.getConnection();
-			//Statement st = conn.createStatement();
-			String sql = "INSERT INTO Members ([FName], [LName], [Username], [Password], [PIN_Code]) VALUES (?,?,?,?,?)";
-			//st.executeQuery(sql);
+			String sql = "INSERT INTO Members " + getMemberInsertString() + " VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
 			st.setString(2, m.lastName);
 			st.setString(3, m.username);
 			st.setString(4, m.password);
 			st.setString(5, m.pin);
+			st.setString(6, m.address);
+			st.setString(7, m.phoneNumber);
 			st.executeUpdate();
-			//st.executeUpdate(sql);
-			//ResultSet rs = st.executeQuery(sql);
-			/*while(rs.next()){
-				System.out.println("\n" + rs.getString("Title"));
-			} */
-		} catch(Exception e){
-			System.out.print(e);
+		} catch(UnavailableUsernameException e){
+			e.printStackTrace();
+		} catch(DuplicatePinException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		} 
 	}
 	
@@ -44,14 +51,15 @@ public class UserManagement {
 			st.setString(1, username);    
 			ResultSet rs = st.executeQuery();
 			rs.next();
-			int id = rs.getInt("ID");
-			String fname = rs.getString("FName");
-			String lname= rs.getString("LName");
-			String uname = rs.getString("Username");
-			String password =  rs.getString("Password");
-			String pincode =  rs.getString("PIN_Code");
-			System.out.println("you have gotten a member");
-			Member m = new Member(fname,lname,uname,password,pincode);
+			int id = rs.getInt(LibraryConstants.ID);
+			String fname = rs.getString(LibraryConstants.FIRST_NAME);
+			String lname= rs.getString(LibraryConstants.LAST_NAME);
+			String uname = rs.getString(LibraryConstants.USERNAME);
+			String password =  rs.getString(LibraryConstants.PASSWORD);
+			String pincode =  rs.getString(LibraryConstants.PIN_CODE);
+			String address = rs.getString(LibraryConstants.ADDRESS);
+			String phoneNumber = rs.getString(LibraryConstants.PHONE_NUMBER);
+			Member m = new Member(fname,lname,uname,password,pincode, address, phoneNumber);
 			m.setId(id);
 			return m;
 		    } catch(Exception e){
@@ -60,22 +68,23 @@ public class UserManagement {
 		    }		
 	}
 	
+	//needed for some specific methods
 	public static Member getMemberByPin(String pin){
 		try{
 			Connection conn = Connect.getConnection();
-			
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE PIN_Code = ?");    
 			st.setString(1, pin);    
 			ResultSet rs = st.executeQuery();
 			rs.next();
-			int id = rs.getInt("ID");
-			String fname = rs.getString("FName");
-			String lname= rs.getString("LName");
-			String uname = rs.getString("Username");
-			String password =  rs.getString("Password");
-			String pincode =  rs.getString("PIN_Code");
-			System.out.println("you have gotten a member");
-			Member m = new Member(fname,lname,uname,password,pincode);
+			int id = rs.getInt(LibraryConstants.ID);
+			String fname = rs.getString(LibraryConstants.FIRST_NAME);
+			String lname= rs.getString(LibraryConstants.LAST_NAME);
+			String uname = rs.getString(LibraryConstants.USERNAME);
+			String password =  rs.getString(LibraryConstants.PASSWORD);
+			String pincode =  rs.getString(LibraryConstants.PIN_CODE);
+			String address = rs.getString(LibraryConstants.ADDRESS);
+			String phoneNumber = rs.getString(LibraryConstants.PHONE_NUMBER);
+			Member m = new Member(fname,lname,uname,password,pincode, address, phoneNumber);
 			m.setId(id);
 			return m;
 		    } catch(Exception e){
@@ -87,12 +96,14 @@ public class UserManagement {
 	public static void updateMember(Member m, int id){
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Members SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
+			String sql = "UPDATE Members SET "+ getMemberUpdateString() + " WHERE " + LibraryConstants.ID + " = "+ id;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
 			st.setString(2, m.lastName);
 			st.setString(3, m.username);
 			st.setString(4, m.password); 
+			st.setString(5, m.address);
+			st.setString(6, m.phoneNumber);
 			st.executeUpdate();
 		} catch(Exception e){
 			System.out.print(e);
@@ -111,21 +122,50 @@ public class UserManagement {
 		} 	
 	}
 	
+	private static String getMemberInsertString(){
+		String updateString = "([" + LibraryConstants.FIRST_NAME + "], [" + LibraryConstants.LAST_NAME + "], [" + 
+				LibraryConstants.USERNAME + "], [" + LibraryConstants.PASSWORD+ "], [" + LibraryConstants.PIN_CODE +"], [" + 
+				LibraryConstants.ADDRESS + "], [" + LibraryConstants.PHONE_NUMBER +"])";
+		return updateString;
+	}
+	
+	private static String getMemberUpdateString(){
+		return LibraryConstants.FIRST_NAME + " = ?, "+ LibraryConstants.LAST_NAME + " = ?, "+ LibraryConstants.USERNAME  + " = ?, "+
+				LibraryConstants.PASSWORD + " = ?, "+ LibraryConstants.ADDRESS + " = ?, "+ LibraryConstants.PHONE_NUMBER + " = ?";
+	}
+	
+	
 	////////////////////
 	//Manager management
 	////////////////////
 	public static void createManager(Manager m){
 		try{
+			if(DuplicateChecker.duplicateUsernameCheck(m.username)){
+				throw new UnavailableUsernameException("This username is taken");
+			}
+			if(DuplicateChecker.duplicatePinCheck(m.pin)){
+				throw new DuplicatePinException("This pin is a duplicate");
+			}
+			
 			Connection conn = Connect.getConnection();
-			String sql = "INSERT INTO Employees ([FName], [LName], [Username], [Password],[Role]) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO Employees " + getEmployeeInsertString() + " VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
 			st.setString(2, m.lastName);
 			st.setString(3, m.username);
 			st.setString(4, m.password);
 			st.setString(5, m.role);
+			st.setString(6, m.address);
+			st.setString(7, m.phoneNumber);
+			st.setString(8, m.pin);
 			st.executeUpdate();
-		} catch(Exception e){
+			
+		} catch(UnavailableUsernameException e){
+			e.printStackTrace();
+		} catch(DuplicatePinException e){
+			e.printStackTrace();
+		} 
+		catch(Exception e){
 			System.out.print(e);
 		} 	
 	}
@@ -143,7 +183,10 @@ public class UserManagement {
 			String lname= rs.getString("LName");
 			String uname = rs.getString("Username");
 			String password =  rs.getString("Password");
-			return new Manager(fname,lname,uname,password);
+			String address = rs.getString(LibraryConstants.ADDRESS);
+			String phoneNumber = rs.getString(LibraryConstants.PHONE_NUMBER);
+			String pin = rs.getString(LibraryConstants.PIN_CODE);
+			return new Manager(fname,lname,uname,password, address, phoneNumber,pin);
 		    } catch(Exception e){
 		    	return null;
 		    }		
@@ -152,12 +195,14 @@ public class UserManagement {
 	public static void updateManager(Manager m, int id){
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Employees SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
+			String sql = "UPDATE Employees SET " + getEmployeeUpdateString() + " WHERE " + LibraryConstants.ID + " = "+ id;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
 			st.setString(2, m.lastName);
 			st.setString(3, m.username);
 			st.setString(4, m.password); 
+			st.setString(5, m.address);
+			st.setString(6, m.phoneNumber);
 			st.executeUpdate();
 		} catch(Exception e){
 			System.out.print(e);
@@ -181,16 +226,31 @@ public class UserManagement {
 	/////////////////////
 	public static void createAssociate(Associate a){
 		try{
+			if(DuplicateChecker.duplicateUsernameCheck(a.username)){
+				throw new UnavailableUsernameException("This username is taken");
+			}
+			if(DuplicateChecker.duplicatePinCheck(a.pin)){
+				throw new DuplicatePinException("This pin is a duplicate");
+			}
+			
 			Connection conn = Connect.getConnection();
-			String sql = "INSERT INTO Employees ([FName], [LName], [Username], [Password],[Role]) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO Employees "+ getEmployeeInsertString() + " VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, a.firstName);
 			st.setString(2, a.lastName);
 			st.setString(3, a.username);
 			st.setString(4, a.password);
 			st.setString(5, a.role);
+			st.setString(6, a.address);
+			st.setString(7, a.phoneNumber);
+			st.setString(8, a.pin);
 			st.executeUpdate();
-		} catch(Exception e){
+		} catch(UnavailableUsernameException e){
+			e.printStackTrace();
+		} catch(DuplicatePinException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
 			System.out.print(e);
 		} 			
 	}
@@ -208,7 +268,10 @@ public class UserManagement {
 			String lname= rs.getString("LName");
 			String uname = rs.getString("Username");
 			String password =  rs.getString("Password");
-			return new Associate(fname,lname,uname,password);
+			String address = rs.getString(LibraryConstants.ADDRESS);
+			String phoneNumber = rs.getString(LibraryConstants.PHONE_NUMBER);
+			String pin = rs.getString(LibraryConstants.PIN_CODE);
+			return new Associate(fname,lname,uname,password, address, phoneNumber,pin);
 		    } catch(Exception e){
 		    	return null;
 		    }		
@@ -217,12 +280,14 @@ public class UserManagement {
 	public static void updateAssociate(Associate m, int id){
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Employees SET FName = ?, LName = ?, Username = ?, Password = ? WHERE ID = "+ id;
+			String sql = "UPDATE Employees SET " + getEmployeeUpdateString() + " WHERE " + LibraryConstants.ID + " = "+ id;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
 			st.setString(2, m.lastName);
 			st.setString(3, m.username);
 			st.setString(4, m.password); 
+			st.setString(5, m.address);
+			st.setString(6, m.phoneNumber);
 			st.executeUpdate();
 		} catch(Exception e){
 			System.out.print(e);
@@ -239,6 +304,18 @@ public class UserManagement {
 		} catch(Exception e){
 			System.out.print(e);
 		} 			
+	}
+	
+	private static String getEmployeeInsertString(){
+		String updateString = "([" + LibraryConstants.FIRST_NAME + "], [" + LibraryConstants.LAST_NAME + "], [" + 
+				LibraryConstants.USERNAME + "], [" + LibraryConstants.PASSWORD+ "], [" + LibraryConstants.ROLE +"], [" + 
+				LibraryConstants.ADDRESS + "], [" + LibraryConstants.PHONE_NUMBER +"], [" + LibraryConstants.PIN_CODE + "])";
+		return updateString;
+	}
+	
+	private static String getEmployeeUpdateString(){
+		return LibraryConstants.FIRST_NAME + " = ?, "+ LibraryConstants.LAST_NAME + " = ?, "+ LibraryConstants.USERNAME  + " = ?, "+
+				LibraryConstants.PASSWORD + " = ?, "+ LibraryConstants.ADDRESS + " = ?, "+ LibraryConstants.PHONE_NUMBER + " = ?";
 	}
 	
 	public static String generatePINCode() {

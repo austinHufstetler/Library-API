@@ -57,7 +57,8 @@ public class IntegrationTesting {
 						System.out.println("Please enter search criteria: ");
 						scan.nextLine();
 						String searchBy = scan.nextLine();
-						ArrayList<Book> list = BookSearch.standardSearch(searchBy);
+						BookSearch bs = new BookSearch();
+						ArrayList<Book> list = bs.standardSearch(searchBy);
 						for(int i=0; i<list.size(); i++){
 							System.out.println( "BOOK ID = " + list.get(i).getId() + " - " + list.get(i).getAuthorFirstName() + " " + list.get(i).getAuthorLastName() + " - " + list.get(i).getTitle());
 						}

@@ -36,13 +36,19 @@ public class UserTest {
 		
 		//Test 5. Create Members
 		
-		//Member m1 = new Member("Janet","Jackson","jjackson","gemini98");
-		//UserManagement.createMember(m1); 
+		/*
+		Member m1 = new Member("Janet","Jac","jjan","gemini98", "808 My House", "2299090222");
+		m1.setPin("1002");
+		UserManagement.createMember(m1); 
+		*/
 		
 		//Test 6. Edit Members
 		
-		/*Member m2 = new Member("Jennifer","Lawrence","jlaw","mother!","10091");
-		UserManagement.updateMember(m2,4);	*/
+		/*
+		Member m2 = UserManagement.getMember("jlaw");
+		m2.setPassword("beatlejuice");
+		UserManagement.updateMember(m2, m2.getId());
+		*/
 		
 		//Test 7. Remove Members
 		
@@ -92,7 +98,12 @@ public class UserTest {
 		//Test 16. Read
 		//System.out.println(UserManagement.readMember("dpickle"));
 		
-
+		//Test 17. New update
+		/*
+		Member m2 = UserManagement.getMember("ldoe");
+		m2.setLastName("Lemon");
+		UserManagement.updateMember(m2, m2.getId());
+		*/
 		
 
 		

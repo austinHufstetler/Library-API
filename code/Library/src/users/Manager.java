@@ -7,8 +7,13 @@ import time.TimeManagement;
 
 public class Manager extends Employee {
 	
-	public Manager(String firstName, String lastName, String username, String password) {
-		super(firstName, lastName, "manager", username, password);
+	public Manager(String firstName, String lastName, String username, String password, String address, String phoneNumber) {
+		super(firstName, lastName, "manager", username, password, address, phoneNumber);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Manager(String firstName, String lastName, String username, String password, String address, String phoneNumber, String pin) {
+		super(firstName, lastName, "manager", username, password, address, phoneNumber, pin);
 		// TODO Auto-generated constructor stub
 	}
 	

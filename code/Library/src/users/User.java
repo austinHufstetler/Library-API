@@ -11,6 +11,8 @@ public abstract class User extends LibraryObject{
 	String username;
 	String password;
 	String pin;
+	String address;
+	String phoneNumber;
 	
 	//person who has not entered any information
 	public User(){
@@ -22,26 +24,30 @@ public abstract class User extends LibraryObject{
 	}
 	
 	//users who plan to become members
-	public User(String firstName, String lastName, String role, String username, String password) {
+	public User(String firstName, String lastName, String role, String username, String password, String address, String phoneNumber) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.role = role;
 		this.username = username;
 		this.password = password;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
 		String tempPin = UserManagement.generatePINCode();
-		while(DuplicateChecker.duplicateCheck(tempPin) == true) {
+		while(DuplicateChecker.duplicatePinCheck(tempPin) == true) {
 			tempPin = UserManagement.generatePINCode(); 
 		}
 		this.pin = tempPin;
 	}
 	
 	//for already created users, used for getting objects
-	public User(String firstName, String lastName, String role, String username, String password, String pin) {
+	public User(String firstName, String lastName, String role, String username, String password, String address, String phoneNumber, String pin) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.role = role;
 		this.username = username;
 		this.password = password;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
 		this.pin = pin;
 	}
 	
@@ -76,6 +82,19 @@ public abstract class User extends LibraryObject{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	
 	//action methods

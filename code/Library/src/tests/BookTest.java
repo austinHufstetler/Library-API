@@ -58,8 +58,8 @@ public class BookTest {
 	} */
 		
 	//Test 4. Check if book is new
-	Book b1 = BookManagement.getBook(8);
-	System.out.println(b1.isNew());
+	//Book b1 = BookManagement.getBook(8);
+	//System.out.println(b1.isNew());
 	
 	}
 }

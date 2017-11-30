@@ -4,15 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import common.LibraryConstants;
 import users.UserManagement;
 
 public class DuplicateChecker {
 	
-	public static boolean duplicateCheck(String pin) {
-		return checkDuplicateEmployees(pin) | checkDuplicateMembers(pin);
+	public static boolean duplicatePinCheck(String pin) {
+		return checkDuplicatePinEmployees(pin) | checkDuplicatePinMembers(pin);
 	}
 	
-	private static boolean checkDuplicateEmployees(String pin){
+	private static boolean checkDuplicatePinEmployees(String pin){
 		try{
 			Connection conn = Connect.getConnection();
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Employees WHERE PIN_Code= ?");    
@@ -25,12 +26,12 @@ public class DuplicateChecker {
 			else
 				return false;
 		    } catch(Exception e){
-		    	System.out.println("IGNORE " + e);
+		    	//e.printStackTrace();
 		    	return false;
 		    }	
 	}
 	
-	private static boolean checkDuplicateMembers(String pin){
+	private static boolean checkDuplicatePinMembers(String pin){
 		try{
 			Connection conn = Connect.getConnection();
 			
@@ -44,7 +45,49 @@ public class DuplicateChecker {
 			else
 				return false;
 		    } catch(Exception e){
-		    	System.out.println("IGNORE " + e);
+		    	//e.printStackTrace();
+		    	return false;
+		    }	
+	}
+	
+	
+	public static boolean duplicateUsernameCheck(String username) {
+		return checkDuplicateUsernameEmployees(username) | checkDuplicateUsernameMembers(username);
+	}
+	
+	private static boolean checkDuplicateUsernameEmployees(String username){
+		try{
+			Connection conn = Connect.getConnection();
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE "+ LibraryConstants.USERNAME+ " = ?");   
+			st.setString(1, username);   
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String compareUsername = rs.getString(LibraryConstants.USERNAME);
+			if(compareUsername.equals(username))
+				return true;
+			else
+				return false;
+		    } catch(Exception e){
+		    	//e.printStackTrace();
+		    	return false;
+		    }	
+	}
+	
+	private static boolean checkDuplicateUsernameMembers(String username){
+		try{
+			Connection conn = Connect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Members WHERE "+ LibraryConstants.USERNAME+ " = ?");    
+			st.setString(1, username);   
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String compareUsername = rs.getString(LibraryConstants.USERNAME);
+			if(compareUsername.equals(username))
+				return true;
+			else
+				return false;
+		    } catch(Exception e){
+		    	//e.printStackTrace();
 		    	return false;
 		    }	
 	}

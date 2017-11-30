@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="users.Member"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="users.UserManagement"/>
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
-<fullyQualifiedTypeName name="users.FineManagement"/>
 <fullyQualifiedTypeName name="java.text.DateFormat"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-<fullyQualifiedTypeName name="time.TimeManagement"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="users.Authorization"/>
 <fullyQualifiedTypeName name="users.User"/>
 <fullyQualifiedTypeName name="libraryexceptions.InvalidUserException"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="libraryutils.Connect"/>
-<fullyQualifiedTypeName name="java.awt.print.Book"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="time.TimeTools"/>
 <fullyQualifiedTypeName name="books.Book"/>
 <fullyQualifiedTypeName name="books.BookManagement"/>
-<fullyQualifiedTypeName name="books.BookTools"/>
-<fullyQualifiedTypeName name="books.BookSearch"/>
-<fullyQualifiedTypeName name="common.LibraryConstants"/>
 <fullyQualifiedTypeName name="users.UserSearch"/>
 <fullyQualifiedTypeName name="users.Manager"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="time.TimeManagement"/>
+<fullyQualifiedTypeName name="users.UserManagement"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Member"/>
+<fullyQualifiedTypeName name="users.Member"/>
+<fullyQualifiedTypeName name="users.FineManagement"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="java.awt.print.Book"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="books.BookTools"/>
+<fullyQualifiedTypeName name="books.BookSearch"/>
+<fullyQualifiedTypeName name="tests.BookSearchTest"/>
+<fullyQualifiedTypeName name="common.LibraryConstants"/>
 </qualifiedTypeNameHistroy>
