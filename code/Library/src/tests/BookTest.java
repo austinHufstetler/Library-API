@@ -60,6 +60,11 @@ public class BookTest {
 	//Test 4. Check if book is new
 	//Book b1 = BookManagement.getBook(8);
 	//System.out.println(b1.isNew());
+		
+	//test 5. renewals
+	Book b1 = BookManagement.getBook(8);
+	b1.requestRenewal("90909");
+	
 	
 	}
 }

@@ -4,17 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import books.Book;
+import books.BookManagement;
 import common.LibraryConstants;
 import libraryutils.Connect;
 import users.FineManagement;
 import users.Member;
+import users.SuspensionManagement;
 import users.UserManagement;
 
 public class TimeManagement implements LibraryConstants{
 	
 	public static void newDay(){
 		//updateBookTimes();
+		updateRenewals();
+		
+		//should be last
 		updateFines();
+		
 	}
 	
 	
@@ -31,19 +38,48 @@ public class TimeManagement implements LibraryConstants{
 				if(TimeTools.getDaysCheckedOut(id) > LibraryConstants.CHECKOUT_PERIOD) {
 					//member whose fines are over the checkout period
 					Member violatingMember = UserManagement.getMemberByPin(pin);
+					System.out.println(violatingMember.getLastName());
 					//issues fines to that member
 					FineManagement.issueFines(violatingMember.getUsername(), LibraryConstants.LATE_FEE);
-				} //end of IF
+					if(FineManagement.getFines(violatingMember.getUsername()) > LibraryConstants.ALLOWABLE_FINES){
+						SuspensionManagement.suspendMember(violatingMember.getUsername(), LibraryConstants.SUSPENDED_FINES);
+					}
+				} 
 			}
 		} 
 		catch(Exception e){
 		    	System.out.print(e);
 		}			
-	
 	}
 	
+	
+	private static void updateRenewals(){
+		try{
+			Connection conn = Connect.getConnection();
+			PreparedStatement gt = conn.prepareStatement("SELECT * FROM Books WHERE PIN_Code != ? AND Hold != ?");    
+			gt.setString(1, "0");
+			gt.setString(2, "0");
+			ResultSet rs = gt.executeQuery();
+			while(rs.next()) {
+				System.out.println("I'm here!");
+				int id = rs.getInt("ID");
+				String pin = rs.getString("PIN_Code");
+				String hold = rs.getString("Hold");
+				if(pin.equals(hold) && TimeTools.getDaysCheckedOut(id) >= LibraryConstants.CHECKOUT_PERIOD){
+					System.out.println("im here!");
+					Book b = BookManagement.getBook(id);
+					b.renewBook(pin);
+				}
+
+			}
+		} 
+		catch(Exception e){
+		    	System.out.print(e);
+		}		
+	} 
+	
 	private void updateHoldPickup(){
-		
+
 	}
 	
 

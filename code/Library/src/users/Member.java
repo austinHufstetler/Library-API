@@ -36,8 +36,8 @@ public class Member extends User {
 	
 	//actions methods
 	
-	public void renewBook(Book book){
-		book.renewBook(this.pin);
+	public void requestRenewal(Book book){
+		book.requestRenewal(this.pin);
 	}
 	
 	public void reportLostBook(Book book){

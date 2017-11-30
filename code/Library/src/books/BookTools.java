@@ -2,9 +2,10 @@ package books;
 
 import java.util.ArrayList;
 
+//this class will be for dealing with multiple books and other things
+
 public class BookTools {
-	///MOVE ALL BELOW SOMEWHERE ELSE
-	//is this the right place for it?
+
 	public static ArrayList<Book> getCheckedOutBooks(String pin){
 		ArrayList<Book> list = new ArrayList<Book>();
 		Book book = new Book();
