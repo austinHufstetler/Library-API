@@ -4,7 +4,10 @@ import java.sql.*;
 import java.util.Random;
 
 import common.LibraryConstants;
+import libraryexceptions.DuplicatePinException;
+import libraryexceptions.UnavailableUsernameException;
 import libraryutils.Connect;
+import libraryutils.DuplicateChecker;
 
 public class UserManagement {
 
@@ -13,6 +16,12 @@ public class UserManagement {
 	///////////////////
 	public static void createMember(Member m){
 		try{
+			if(DuplicateChecker.duplicateUsernameCheck(m.username)){
+				throw new UnavailableUsernameException("This username is taken");
+			}
+			if(DuplicateChecker.duplicatePinCheck(m.pin)){
+				throw new DuplicatePinException("This pin is a duplicate");
+			}
 			Connection conn = Connect.getConnection();
 			String sql = "INSERT INTO Members " + getMemberInsertString() + " VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -24,8 +33,13 @@ public class UserManagement {
 			st.setString(6, m.address);
 			st.setString(7, m.phoneNumber);
 			st.executeUpdate();
-		} catch(Exception e){
-			System.out.print(e);
+		} catch(UnavailableUsernameException e){
+			e.printStackTrace();
+		} catch(DuplicatePinException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		} 
 	}
 	
@@ -54,6 +68,7 @@ public class UserManagement {
 		    }		
 	}
 	
+	//needed for some specific methods
 	public static Member getMemberByPin(String pin){
 		try{
 			Connection conn = Connect.getConnection();
@@ -125,6 +140,13 @@ public class UserManagement {
 	////////////////////
 	public static void createManager(Manager m){
 		try{
+			if(DuplicateChecker.duplicateUsernameCheck(m.username)){
+				throw new UnavailableUsernameException("This username is taken");
+			}
+			if(DuplicateChecker.duplicatePinCheck(m.pin)){
+				throw new DuplicatePinException("This pin is a duplicate");
+			}
+			
 			Connection conn = Connect.getConnection();
 			String sql = "INSERT INTO Employees " + getEmployeeInsertString() + " VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -137,7 +159,13 @@ public class UserManagement {
 			st.setString(7, m.phoneNumber);
 			st.setString(8, m.pin);
 			st.executeUpdate();
-		} catch(Exception e){
+			
+		} catch(UnavailableUsernameException e){
+			e.printStackTrace();
+		} catch(DuplicatePinException e){
+			e.printStackTrace();
+		} 
+		catch(Exception e){
 			System.out.print(e);
 		} 	
 	}
@@ -198,6 +226,13 @@ public class UserManagement {
 	/////////////////////
 	public static void createAssociate(Associate a){
 		try{
+			if(DuplicateChecker.duplicateUsernameCheck(a.username)){
+				throw new UnavailableUsernameException("This username is taken");
+			}
+			if(DuplicateChecker.duplicatePinCheck(a.pin)){
+				throw new DuplicatePinException("This pin is a duplicate");
+			}
+			
 			Connection conn = Connect.getConnection();
 			String sql = "INSERT INTO Employees "+ getEmployeeInsertString() + " VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -210,7 +245,12 @@ public class UserManagement {
 			st.setString(7, a.phoneNumber);
 			st.setString(8, a.pin);
 			st.executeUpdate();
-		} catch(Exception e){
+		} catch(UnavailableUsernameException e){
+			e.printStackTrace();
+		} catch(DuplicatePinException e){
+			e.printStackTrace();
+		}
+		catch(Exception e){
 			System.out.print(e);
 		} 			
 	}

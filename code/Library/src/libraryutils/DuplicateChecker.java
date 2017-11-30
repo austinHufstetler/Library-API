@@ -26,7 +26,7 @@ public class DuplicateChecker {
 			else
 				return false;
 		    } catch(Exception e){
-		    	System.out.println("IGNORE " + e);
+		    	//e.printStackTrace();
 		    	return false;
 		    }	
 	}
@@ -45,7 +45,7 @@ public class DuplicateChecker {
 			else
 				return false;
 		    } catch(Exception e){
-		    	System.out.println("IGNORE " + e);
+		    	//e.printStackTrace();
 		    	return false;
 		    }	
 	}
@@ -68,7 +68,7 @@ public class DuplicateChecker {
 			else
 				return false;
 		    } catch(Exception e){
-		    	System.out.println("IGNORE " + e);
+		    	//e.printStackTrace();
 		    	return false;
 		    }	
 	}
@@ -87,7 +87,7 @@ public class DuplicateChecker {
 			else
 				return false;
 		    } catch(Exception e){
-		    	System.out.println("IGNORE " + e);
+		    	//e.printStackTrace();
 		    	return false;
 		    }	
 	}
