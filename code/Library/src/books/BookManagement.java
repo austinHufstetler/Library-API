@@ -164,7 +164,7 @@ public class BookManagement implements LibraryConstants {
 	public void update(Book b) {
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Books SET ISBN = ?, Author_FName = ?, Author_LName = ?, Title = ?, Genre = ?, ReleaseYear = ?, Hold = ? WHERE ID = "+ b.getId();
+			String sql = "UPDATE Books SET ISBN = ?, Author_FName = ?, Author_LName = ?, Title = ?, Genre = ?, ReleaseYear = ?, Hold = ?, PIN_Code = ? WHERE ID = "+ b.getId();
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1,b.getIsbn());
 			st.setString(2, b.getAuthorFirstName());
@@ -173,6 +173,7 @@ public class BookManagement implements LibraryConstants {
 			st.setString(5, b.getGenre());
 			st.setString(6, b.getReleaseYear());
 			st.setString(7, b.getHold());
+			st.setString(8, b.getPin());
 			st.executeUpdate();
 			
 		} catch(Exception e){

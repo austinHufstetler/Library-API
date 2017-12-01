@@ -41,7 +41,7 @@ public class FineManagement {
 			st.setString(1, Double.toString(fine - amountPaid));
 			st.setString(2, username);
 			st.executeUpdate();
-			if(UserInformation.isSuspended(username) && UserInformation.getReasonSuspended(username) == 1 && (fine - amountPaid) < 25){
+			if(UserInformation.isSuspended(username) && UserInformation.getReasonSuspended(username) == 1 && (fine - amountPaid) < LibraryConstants.ALLOWABLE_FINES){
 				SuspensionManagement.unsuspendMember(username);
 			}
 			

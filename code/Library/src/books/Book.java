@@ -224,8 +224,8 @@ public class Book extends LibraryObject{
 	}
 	
 	//THIS IS NOT FINISHED, NEEDS TO DEAL WITH UPDATING WHEN 2 WEEKS IS UP (THEY RENEW ON DAY SUPPOSE TO RETURN (or do we deal with that here)?
-	public void renewBook(String pin){
-		if(this.isAvailableHold() && this.isNew()) {
+	public void requestRenewal(String pin){
+		if(this.isAvailableHold() && !this.isNew()) {
 			try{
 				Connection conn = Connect.getConnection();
 				String sql = "UPDATE Books SET Hold = ? WHERE ID= " + this.getId();
@@ -237,9 +237,31 @@ public class Book extends LibraryObject{
 			} 	
 		}
 		else{
-			System.out.println("This book is not available for renewal");
+			//System.out.println("This book is not available for renewal");
+			//throws some exception
 		}		
 	}
+	
+	
+	public void renewBook(String pin){
+		if(!this.isNew()) {
+			try{
+				Connection conn = Connect.getConnection();
+				String sql = "UPDATE Books SET Pin_Code = ?, Hold = ?, DateStartCheckedOut = ? WHERE ID= " + this.getId();
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setString(1, pin);
+				st.setString(2, "0");
+				st.setDate(3, java.sql.Date.valueOf(TimeTools.getCurrentDate()));
+				st.executeUpdate();
+			} catch(Exception e){
+				e.printStackTrace(System.out);
+			} 	
+		}
+		else{
+			//System.out.println("This book is not available for renewal");
+			//throws some exception
+		}		
+	} 
 	
 	@Override
 	public boolean equals(Object o){
