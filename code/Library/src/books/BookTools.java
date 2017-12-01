@@ -28,6 +28,19 @@ public class BookTools {
 		}
 	}
 	
+	//return a set of books or actually checkout book? how will it actually know which of duplicate books to check out? does it matter?
+	public static ArrayList<Book> scanBook(String isbn, String pin){
+		Book b = new Book();
+		b.setIsbn(isbn);
+		b.setHold("0");
+		b.setPin("0");
+		BookSearch bs = new BookSearch(b);
+		ArrayList<Book> possibilities = bs.compoundSearch(bs.byHold(), bs.byISBN(), bs.byPin());
+		for(int i=0; i<possibilities.size();i++){
+			System.out.println(possibilities.get(i).getTitle());
+		}
+		return possibilities;
+	}
 	
 	/*
 	public ArrayList<Book> returnBooksOnHoldReadyForCheckout(){
