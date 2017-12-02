@@ -111,31 +111,6 @@ public class Book extends LibraryObject{
 		this.cost = cost;
 	}
 
-	
-	/*old way, may be useful in future
-	public static void holdBook(char searchBy, String search, String pin){
-		String field = "";
-		switch(searchBy){
-			case 'i': 
-				field = "ISBN";
-				break;
-			default:
-				field = "Title";
-				break;
-		}
-		try{
-			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Books SET Hold = ? WHERE " + field + " = ?";
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, pin);
-			st.setString(2, search);
-			st.executeUpdate();
-			System.out.println("You have successfully checkout out a book!");
-		} catch(Exception e){
-			System.out.print("Hold book error " + e);
-		} 		
-	}
-	*/
 	public void holdBook(String pin){
 		if(this.isAvailableHold()) {
 			try{
@@ -145,7 +120,7 @@ public class Book extends LibraryObject{
 				st.setString(1, pin);
 				st.executeUpdate();
 			} catch(Exception e){
-				System.out.print(e);
+				e.printStackTrace();
 			} 	
 		}
 		else{
@@ -168,7 +143,7 @@ public class Book extends LibraryObject{
 				return false;
 			}
 		    } catch(Exception e){
-		    	System.out.println(e);
+		    	e.printStackTrace();
 		    	return false;
 		    }			
 	}
@@ -233,7 +208,7 @@ public class Book extends LibraryObject{
 				return false;
 			}
 		    } catch(Exception e){
-		    	System.out.println(e);
+		    	e.printStackTrace();
 		    	return false;
 		    }			
 	}

@@ -84,8 +84,6 @@ public class BookManagement implements LibraryConstants {
 
 	public void delete(String param) {
 		try{
-			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
-			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
 			Connection conn = getConnection();
 			String sql = "DELETE FROM Books " + param;
 			PreparedStatement st = conn.prepareStatement(sql);
