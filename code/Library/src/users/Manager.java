@@ -93,10 +93,6 @@ public class Manager extends Employee {
 
 	}
 
-	//SEARCHES
-	public ArrayList<Member> memberSearch(String search) {
-		return UserSearch.memberSearch(search);
-	}
 	
 	
 	
