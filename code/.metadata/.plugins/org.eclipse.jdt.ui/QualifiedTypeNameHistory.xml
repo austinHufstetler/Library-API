@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
 <fullyQualifiedTypeName name="java.text.DateFormat"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
@@ -13,8 +12,6 @@
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="time.TimeTools"/>
-<fullyQualifiedTypeName name="books.Book"/>
-<fullyQualifiedTypeName name="books.BookManagement"/>
 <fullyQualifiedTypeName name="users.UserSearch"/>
 <fullyQualifiedTypeName name="users.Manager"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -32,4 +29,10 @@
 <fullyQualifiedTypeName name="books.BookSearch"/>
 <fullyQualifiedTypeName name="tests.BookSearchTest"/>
 <fullyQualifiedTypeName name="common.LibraryConstants"/>
+<fullyQualifiedTypeName name="libraryexceptions.UnavailableUsernameException"/>
+<fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
+<fullyQualifiedTypeName name="libraryexceptions.DuplicatePinException"/>
+<fullyQualifiedTypeName name="users.SuspensionManagement"/>
+<fullyQualifiedTypeName name="books.BookManagement"/>
+<fullyQualifiedTypeName name="books.Book"/>
 </qualifiedTypeNameHistroy>

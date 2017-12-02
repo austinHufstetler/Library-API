@@ -3,10 +3,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import common.LibraryConstants;
-
+import libraryexceptions.NonrenewableBookException;
 import common.*;
 import libraryutils.Connect;
 import time.TimeTools;
+import users.FineManagement;
+import users.Member;
+import users.SuspensionManagement;
+import users.UserManagement;
+import books.BookManagement;
 
 public class Book extends LibraryObject{
 	String isbn = "";
@@ -17,6 +22,7 @@ public class Book extends LibraryObject{
 	String releaseYear = "";
 	String hold = "";
 	String pin = "";
+	double cost = 0;
 
 	//Basic Book constructor
 	public Book(){
@@ -24,7 +30,7 @@ public class Book extends LibraryObject{
 	}
 
 	//Book Constructor that sets all fields in parameter
-	public Book(String isbn,String authorFirstName,String authorLastName, String title, String genre, String releaseYear, String hold) {
+	public Book(String isbn,String authorFirstName,String authorLastName, String title, String genre, String releaseYear, String hold, double cost) {
 		super();
 		this.isbn = isbn;
 		this.authorFirstName = authorFirstName;
@@ -33,6 +39,7 @@ public class Book extends LibraryObject{
 		this.genre = genre;
 		this.releaseYear = releaseYear;
 		this.hold = hold;
+		this.cost = cost;
 	}
 
 	public String getIsbn() {
@@ -94,6 +101,14 @@ public class Book extends LibraryObject{
 
 	public void setHold(String hold) {
 		this.hold = hold;
+	}
+	
+	public double getCost(){
+		return cost;
+	}
+	
+	public void setCost(double cost){
+		this.cost = cost;
 	}
 
 	
@@ -243,7 +258,7 @@ public class Book extends LibraryObject{
 	}
 	
 	
-	public void renewBook(String pin){
+	public void renewBook(String pin) throws NonrenewableBookException{
 		if(!this.isNew()) {
 			try{
 				Connection conn = Connect.getConnection();
@@ -258,10 +273,19 @@ public class Book extends LibraryObject{
 			} 	
 		}
 		else{
-			//System.out.println("This book is not available for renewal");
-			//throws some exception
+			throw new NonrenewableBookException("This user cannot renew this book");
 		}		
 	} 
+	
+	public void reportLost(String pin){
+		Member m1 = UserManagement.getMemberByPin(pin);
+		FineManagement.issueFines(m1.getUsername(), this.getCost());
+		UserManagement.updateMember(m1, m1.getId());
+		if(m1.getFines() > LibraryConstants.ALLOWABLE_FINES){
+			SuspensionManagement.suspendMember(m1.getUsername(), LibraryConstants.SUSPENDED_FINES);
+		}
+		BookManagement.deleteBook(this.getId());
+	}
 	
 	@Override
 	public boolean equals(Object o){
@@ -277,4 +301,13 @@ public class Book extends LibraryObject{
 		}
 		return true;
 	}
+	
+	@Override
+	public int hashCode() {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + getId();
+	    return result;
+	}
+
 }
