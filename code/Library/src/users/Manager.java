@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import books.Book;
 import time.TimeManagement;
+import books.BookManagement;
 
 public class Manager extends Employee {
 	
@@ -37,7 +38,7 @@ public class Manager extends Employee {
 	}
 	
 	//BOOKS
-	private static void addBook(){
+	private static void addBook(Book b){
 		
 	}
 	
@@ -72,12 +73,12 @@ public class Manager extends Employee {
 		UserManagement.createManager(m);
 	}
 	
-	public void removeManager(String username){
-		UserManagement.deleteManager(username);
+	public void removeManager(Manager m){
+		UserManagement.deleteManager(m.username);
 	}
 	
-	private static void editManager(){
-		
+	private void editManager(Manager m, int id){
+		UserManagement.updateManager(m, id);
 	}
 	
 	//ASSOCIATES
@@ -89,9 +90,10 @@ public class Manager extends Employee {
 		UserManagement.deleteAssociate(username);
 	}
 	
-	private static void editAssociate(){
-
+	public void editAssociate(Associate a, int id){
+		UserManagement.updateAssociate(a, id);
 	}
+	
 
 	
 	

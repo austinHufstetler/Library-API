@@ -84,8 +84,6 @@ public class BookSearch {
 		}
 	}
 	
-	//TEST!
-	//SOMETHING LIKE THIS BUT REPEATS SHOULD BE REMOVED, AND POSSIBLY SORTED
 	public ArrayList<Book> customSearch(String ... param) {
 		ArrayList<Book> list = new ArrayList<Book>();
 		try{
@@ -95,7 +93,6 @@ public class BookSearch {
 					list.add(books.get(i));
 				}
 			}
-			//removes dups, hopefully
 			Set<Book> set = new HashSet<Book>(list);
 			list = new ArrayList<Book>(set);
 			return list;
@@ -179,7 +176,6 @@ public class BookSearch {
 	
 	public String byTitle(){
 		return "UPPER(Title) LIKE UPPER(?)";
-		//return "WHERE UPPER(Title) LIKE UPPER(" + book.getTitle() + ")";
 	}
 
 	public String byISBN(){

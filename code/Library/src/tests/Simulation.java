@@ -52,10 +52,6 @@ public class Simulation {
 					
 					break;
 				case 5: 
-					System.out.println("Please enter search criteria: ");
-					scan.nextLine();
-					String searchBy = scan.nextLine();
-					System.out.println(m1.memberSearch(searchBy));
 					break;
 				case 10:
 					System.out.println("Goodbye");
