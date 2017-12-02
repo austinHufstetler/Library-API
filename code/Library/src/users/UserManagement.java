@@ -96,7 +96,7 @@ public class UserManagement {
 	public static void updateMember(Member m, int id){
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "UPDATE Members SET "+ getMemberUpdateString() + " WHERE " + LibraryConstants.ID + " = "+ id;
+			String sql = "UPDATE Members SET "+ getMemberUpdateString() + " WHERE " + LibraryConstants.ID + " = " + id;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, m.firstName);
 			st.setString(2, m.lastName);
@@ -104,6 +104,7 @@ public class UserManagement {
 			st.setString(4, m.password); 
 			st.setString(5, m.address);
 			st.setString(6, m.phoneNumber);
+			st.setString(7, m.getUsername());
 			st.executeUpdate();
 		} catch(Exception e){
 			System.out.print(e);

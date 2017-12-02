@@ -1,5 +1,8 @@
 package users;
+import java.util.ArrayList;
+
 import books.Book;
+import books.BookSearch;
 import common.*;
 import libraryutils.DuplicateChecker;
 
@@ -97,13 +100,9 @@ public abstract class User extends LibraryObject{
 		this.phoneNumber = phoneNumber;
 	}
 	
-	//action methods
-	public static void requestMembership(){
-		
-	}
-	
 	public void checkoutBook(Book b, String pin){
 		b.checkoutBook(pin);
 	}
+	
 	
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import books.Book;
+import books.BookSearch;
 import books.BookTools;
 import libraryutils.Connect;
 
@@ -39,10 +40,7 @@ public class Member extends User {
 	public void requestRenewal(Book book){
 		book.requestRenewal(this.pin);
 	}
-	
-	public void reportLostBook(Book book){
-		
-	}
+
 	
 	public ArrayList<Book> getCheckedOutBooks(){
 		return BookTools.getCheckedOutBooks(this.pin);
@@ -64,7 +62,19 @@ public class Member extends User {
 		UserManagement.deleteMember(this.username);
 	}
 	
+	public void reportLostBook(Book b){
+		System.out.println("hello");
+		Book search = new Book();
+		search.setPin(this.pin);
+		BookSearch bs = new BookSearch(search);
+		ArrayList<Book> checkedOut = bs.search(bs.byPin());
+		if(checkedOut.contains(b)){
+			b.reportLost(this.pin);
+		}
+		else{
 
+		}
+	}
 	
 	
 	

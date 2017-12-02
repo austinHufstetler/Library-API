@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import books.Book;
 import time.TimeTools;
+import users.Member;
+import users.UserManagement;
 import books.*;
 
 public class BookTest {
@@ -61,9 +63,16 @@ public class BookTest {
 	//Book b1 = BookManagement.getBook(8);
 	//System.out.println(b1.isNew());
 		
-	//test 5. renewals
+	//test 5. renewals 
+	/*
 	Book b1 = BookManagement.getBook(8);
-	b1.requestRenewal("90909");
+	b1.requestRenewal("90909"); */
+		
+	//test 6. report lost book
+	Member m1 = UserManagement.getMember("jjackn");
+	Book b1 = BookManagement.getBook(16);
+	//System.out.println(b1.getPin());
+	m1.reportLostBook(b1);
 	
 	
 	}

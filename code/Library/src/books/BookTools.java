@@ -42,13 +42,4 @@ public class BookTools {
 		return possibilities;
 	}
 	
-	/*
-	public ArrayList<Book> returnBooksOnHoldReadyForCheckout(){
-		ArrayList<Book> list = new ArrayList<Book>();
-		Book book = new Book();
-		BookSearch BS = new BookSearch(book);
-		list = BS.search(BS.byPin() + " AND " + BS.byNotHold());
-		return list;
-	}
-	*/
 }
