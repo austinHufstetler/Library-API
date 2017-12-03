@@ -69,10 +69,16 @@ public class BookTest {
 	b1.requestRenewal("90909"); */
 		
 	//test 6. report lost book
+	/*
 	Member m1 = UserManagement.getMember("jjackn");
 	Book b1 = BookManagement.getBook(16);
 	//System.out.println(b1.getPin());
 	m1.reportLostBook(b1);
+	*/
+		
+	//Test 7. updated return book
+	Book b1 = BookManagement.getBook(2);
+	b1.returnBook();
 	
 	
 	}

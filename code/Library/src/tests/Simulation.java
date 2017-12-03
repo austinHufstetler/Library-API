@@ -51,6 +51,7 @@ public class Simulation {
 				case 1:
 
 					break;
+
 				case 5:
 					System.out.println("Please enter search criteria: ");
 					scan.nextLine();

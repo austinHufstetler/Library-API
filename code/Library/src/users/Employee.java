@@ -17,22 +17,27 @@ public abstract class Employee extends User {
 		super(firstName, lastName, role, username, password, address, phoneNumber, pin);
 		// TODO Auto-generated constructor stub
 	}
-	
-	//action methods
-	private static void addMember(String firstName, String lastName, String username, String password, String address, String phoneNumber){
-		//temporary until we make generatePin() method
-		Member m = new Member(firstName, lastName, username, password, address, phoneNumber);
-		UserManagement.createMember(m);;
-	}
 
-	private static void displayBooks(Member m){
+	public void returnBooks(Member m){
 		
 	}
 	
-	private static void displayFines(Member m){
-		
+	public double returnFines(Member m){
+		return m.getFines();
 	}
 	
+	//MEMBERS
+	public void addMember(Member m){
+		UserManagement.createMember(m);
+	}
+	
+	public void removeMember(Member m){
+		UserManagement.deleteMember(m.username);
+	}
+	
+	private void editMember(Member m, int id){
+		UserManagement.updateMember(m, id);
+	}
 	
 	
 }
