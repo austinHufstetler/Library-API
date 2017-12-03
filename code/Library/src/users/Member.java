@@ -40,7 +40,6 @@ public class Member extends User {
 	public void requestRenewal(Book book){
 		book.requestRenewal(this.pin);
 	}
-
 	
 	public ArrayList<Book> getCheckedOutBooks(){
 		return BookTools.getCheckedOutBooks(this.pin);
@@ -75,8 +74,6 @@ public class Member extends User {
 
 		}
 	}
-	
-	
 	
 	
 

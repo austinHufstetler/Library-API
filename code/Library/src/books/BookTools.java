@@ -21,7 +21,8 @@ public class BookTools {
 		for(int i=0; i<list.size(); i++){
 			book = list.get(i);
 			book.setPin(" ");
-			BM.update(book);
+			BM.setBook(book);
+			BM.update();
 			if(book.getHold().trim() != "0"){
 				//alertHeldBook();
 			}
@@ -41,5 +42,6 @@ public class BookTools {
 		}
 		return possibilities;
 	}
+	
 	
 }

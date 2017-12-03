@@ -33,7 +33,7 @@ public class BookManagement implements LibraryConstants {
 		try{
 			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
 			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "INSERT INTO Books ([ISBN],[Author_FName],[Author_LName],[Title],[Genre],[ReleaseYear],[Hold],[Cost]) VALUES(?,?,?,?,?,?,?,?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1,book.getIsbn());
@@ -50,17 +50,7 @@ public class BookManagement implements LibraryConstants {
 		}
 	}
 
-
-	public Connection getConnection(){
-		try{
-			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Austin/Desktop/gitclipse/group1/Library_DB.accdb");
-			return conn;
-		}catch(Exception e){
-			System.out.print(e);
-			return null;
-		}
-	}
-
+	/*
 	public void update(Book b) {
 		try{
 			Connection conn = Connect.getConnection();
@@ -80,11 +70,44 @@ public class BookManagement implements LibraryConstants {
 		} catch(Exception e){
 			System.out.print(e);
 		} 	
+	} */
+	
+	public void update() {
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "UPDATE Books SET ISBN = ?,Author_FName = ?,Author_LName = ?,Title = ?,Genre = ?,ReleaseYear = ?,Hold = ?,Cost = ?,PIN_Code = ? WHERE ID = " + book.getId();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1,book.getIsbn());
+			st.setString(2, book.getAuthorFirstName());
+			st.setString(3, book.getAuthorLastName());
+			st.setString(4, book.getTitle());
+			st.setString(5, book.getGenre());
+			st.setString(6, book.getReleaseYear());
+			st.setString(7, book.getHold());
+			st.setString(8, book.getCost()+"");
+			st.setString(9, book.getPin());
+			st.execute();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 	}
-
+	
+	public void delete() {
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "DELETE FROM Books WHERE ID = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, book.getId() + "");
+			st.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		} 	
+	}
+	
+	/*
 	public void delete(String param) {
 		try{
-			Connection conn = getConnection();
+			Connection conn = Connect.getConnection();
 			String sql = "DELETE FROM Books " + param;
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, book.getTitle());
@@ -92,7 +115,7 @@ public class BookManagement implements LibraryConstants {
 		} catch(Exception e){
 			e.printStackTrace(System.out);
 		}
-	}
+	} */
 	
 	public static void deleteBook(int id){
 		try{
