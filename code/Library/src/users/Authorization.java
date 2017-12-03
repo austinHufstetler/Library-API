@@ -12,17 +12,13 @@ public class Authorization {
 	public static User login(String username, String password) throws InvalidUserException{
 		User u = null;
 		if(authorizeUser(username, password)){
-			System.out.println("You exist!");
 			if(authorizeMember(username,password)){
-				System.out.println("You're a member!");
 				u = UserManagement.getMember(username);
 			}
 			else if(authorizeManager(username, password)){
-				System.out.println("You're a manager!");
 				u = UserManagement.getManager(username);
 			}
 			else if(authorizeAssociate(username, password)){
-				System.out.println("You're an associate!");
 				u = UserManagement.getAssociate(username);
 			}
 		}

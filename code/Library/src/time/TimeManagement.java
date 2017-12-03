@@ -81,7 +81,6 @@ public class TimeManagement implements LibraryConstants{
 	private void updateHoldPickup(){
 
 	}
-	
 
 	/* wont work with new way
 	public static boolean updateBookTimes(){

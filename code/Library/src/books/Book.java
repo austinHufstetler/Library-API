@@ -1,5 +1,6 @@
 package books;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import common.LibraryConstants;
@@ -111,6 +112,7 @@ public class Book extends LibraryObject{
 		this.cost = cost;
 	}
 
+	/*
 	public void holdBook(String pin){
 		if(this.isAvailableHold()) {
 			try{
@@ -126,7 +128,64 @@ public class Book extends LibraryObject{
 		else{
 			System.out.println("Not available for holding");
 		}
+	} */
+	
+	public void holdBook(String pin){
+		if(this.isAvailableHold()) {
+			try{
+				Connection conn = Connect.getConnection();
+				String sql = "INSERT INTO HoldMap (Book_Id, Order, PIN_Code) VALUES (?,?,?)";
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setString(1, this.getId()+"");
+				st.setString(2, (this.getOrder() + 1) + "");
+				st.setString(3, pin);
+				st.executeUpdate();
+			} catch(Exception e){
+				e.printStackTrace();
+			} 	
+		}
+		else{
+			System.out.println("Not available for holding");
+		}
+	} 
+	
+	private int getOrder(){
+		int max = 0;
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "SELECT * FROM HoldMap where Book_Id = " + this.getId();
+			PreparedStatement st = conn.prepareStatement(sql);
+			//st.setString(1, "Order");
+			ResultSet rs = st.executeQuery();
+			while(rs.next()){
+				int current = rs.getInt("Order");
+				if(current> max)
+					max = current;
+			}
+			return max;
+		} catch(Exception e){
+			e.printStackTrace();
+			return max;
+		} 			
 	}
+	
+	public void returnBook(){
+		this.pin="0";
+		BookManagement bm = new BookManagement(this);
+		bm.update();
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "UPDATE Books SET DateStartCheckedOut = ?, DateEndCheckedOut = ? WHERE ID= " + this.getId();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, null);
+			st.setDate(2, java.sql.Date.valueOf(TimeTools.getCurrentDate()));
+			st.executeUpdate();
+		} catch(Exception e){
+			System.out.print(e);
+		} 	
+		
+	}
+	
 	
 	public boolean isAvailableHold(){
 		try{
@@ -146,7 +205,8 @@ public class Book extends LibraryObject{
 		    	e.printStackTrace();
 		    	return false;
 		    }			
-	}
+	} 
+	
 	
 	public void checkoutBook(String pin){
 		if(this.isAvailableCheckout()) {
@@ -174,7 +234,7 @@ public class Book extends LibraryObject{
 		try{
 			Connection conn = Connect.getConnection();
 			
-			PreparedStatement st = conn.prepareStatement("SELECT PIN_Code FROM Books WHERE ID = "+this.getId());     
+			PreparedStatement st = conn.prepareStatement("SELECT PIN_Code FROM Books WHERE Book_Id = "+this.getId());     
 			ResultSet rs = st.executeQuery();
 			rs.next();
 			String pin = rs.getString("PIN_Code");
