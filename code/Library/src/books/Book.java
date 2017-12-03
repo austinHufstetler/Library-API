@@ -11,6 +11,7 @@ import time.TimeTools;
 import users.FineManagement;
 import users.Member;
 import users.SuspensionManagement;
+import users.UserInformation;
 import users.UserManagement;
 import books.BookManagement;
 
@@ -131,7 +132,8 @@ public class Book extends LibraryObject{
 	} */
 	
 	public void holdBook(String pin){
-		if(this.isAvailableHold()) {
+		Member m = UserManagement.getMemberByPin(pin);
+		if(!UserInformation.isSuspended(m.getUsername())) {
 			try{
 				Connection conn = Connect.getConnection();
 				String sql = "INSERT INTO HoldMap (Book_Id, Order, PIN_Code) VALUES (?,?,?)";
@@ -145,7 +147,7 @@ public class Book extends LibraryObject{
 			} 	
 		}
 		else{
-			System.out.println("Not available for holding");
+			System.out.println("User is suspended");
 		}
 	} 
 	
@@ -158,7 +160,7 @@ public class Book extends LibraryObject{
 			//st.setString(1, "Order");
 			ResultSet rs = st.executeQuery();
 			while(rs.next()){
-				int current = rs.getInt("Order");
+				int current = rs.getInt("Hold_Order");
 				if(current> max)
 					max = current;
 			}
@@ -167,6 +169,58 @@ public class Book extends LibraryObject{
 			e.printStackTrace();
 			return max;
 		} 			
+	}
+	
+	private int getLowestOrder(){
+		int min = Integer.MAX_VALUE;
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "SELECT * FROM HoldMap where Book_Id = " + this.getId();
+			PreparedStatement st = conn.prepareStatement(sql);
+			//st.setString(1, "Order");
+			ResultSet rs = st.executeQuery();
+			while(rs.next()){
+				int current = rs.getInt("Hold_Order");
+				if(current< min)
+					min = current;
+			}
+			return min;
+		} catch(Exception e){
+			e.printStackTrace();
+			return min;
+		} 			
+	}
+	
+	private String getNextInLine(){
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "SELECT PIN_Code FROM HoldMap where Book_Id = ? AND Hold_Order = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, this.getId());
+			st.setInt(2, this.getLowestOrder());
+			//st.setString(1, "Order");
+			ResultSet rs = st.executeQuery();
+			rs.next();
+			String nextInLine = rs.getString("PIN_Code");
+			return nextInLine;
+		} catch(Exception e){
+			e.printStackTrace();
+			return null;
+		} 			
+	}
+	
+	private void deletePreviousHold(){
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "DELETE FROM HoldMap where Book_Id = ? AND Hold_Order = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, this.getId()+"");
+			st.setString(2, this.getLowestOrder() + "");
+			//st.setString(1, "Order");
+			st.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		} 		
 	}
 	
 	public void returnBook(){
@@ -186,7 +240,7 @@ public class Book extends LibraryObject{
 		
 	}
 	
-	
+	/*
 	public boolean isAvailableHold(){
 		try{
 			Connection conn = Connect.getConnection();
@@ -205,12 +259,29 @@ public class Book extends LibraryObject{
 		    	e.printStackTrace();
 		    	return false;
 		    }			
-	} 
+	} */
+	
+	public boolean isHeld(){
+		if(getOrder() == 0){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
 	
 	
 	public void checkoutBook(String pin){
 		if(this.isAvailableCheckout()) {
 			try{
+				if(this.isHeld()){
+					if(!this.getNextInLine().equals(pin)) {
+						throw new Exception("You cannot check this book out");
+					}
+					else{
+						this.deletePreviousHold();
+					}
+				}
 				Connection conn = Connect.getConnection();
 				String sql = "UPDATE Books SET PIN_Code= ?, DateStartCheckedOut = ? WHERE ID= " + this.getId();
 				PreparedStatement st = conn.prepareStatement(sql);
@@ -230,11 +301,13 @@ public class Book extends LibraryObject{
 	
 	
 	
+	
+	
 	public boolean isAvailableCheckout(){
 		try{
 			Connection conn = Connect.getConnection();
 			
-			PreparedStatement st = conn.prepareStatement("SELECT PIN_Code FROM Books WHERE Book_Id = "+this.getId());     
+			PreparedStatement st = conn.prepareStatement("SELECT PIN_Code FROM Books WHERE ID = "+this.getId());     
 			ResultSet rs = st.executeQuery();
 			rs.next();
 			String pin = rs.getString("PIN_Code");
@@ -275,7 +348,7 @@ public class Book extends LibraryObject{
 	
 	//THIS IS NOT FINISHED, NEEDS TO DEAL WITH UPDATING WHEN 2 WEEKS IS UP (THEY RENEW ON DAY SUPPOSE TO RETURN (or do we deal with that here)?
 	public void requestRenewal(String pin){
-		if(this.isAvailableHold() && !this.isNew()) {
+		if(!this.isNew()) {
 			try{
 				Connection conn = Connect.getConnection();
 				String sql = "UPDATE Books SET Hold = ? WHERE ID= " + this.getId();
