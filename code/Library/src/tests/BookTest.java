@@ -77,8 +77,22 @@ public class BookTest {
 	*/
 		
 	//Test 7. updated return book
+	
+		/*
 	Book b1 = BookManagement.getBook(2);
 	b1.returnBook();
+	*/
+		
+	//test 8. get next in line
+		/*
+	Book b1 = BookManagement.getBook(2);
+	System.out.println(b1.getNextInLine());
+	*/
+		
+		Book b1 = BookManagement.getBook(2);
+		//System.out.println(b1.getNextInLine());
+		System.out.println(b1.isAvailableCheckout());
+		 b1.checkoutBook("1111");
 	
 	
 	}
