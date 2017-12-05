@@ -19,7 +19,7 @@ public class KeywordManagement implements LibraryConstants {
 			//Class.forName("sun.jbc.odbc.JdbcOdbcDriver");
 			//Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/WFH/Desktop/austin/EclipseProjects/software/group1/Library_DB.accdb");
 			Connection conn = Connect.getConnection();
-			String sql = "INSERT INTO Keywords ([Desc) VALUES(?)";
+			String sql = "INSERT INTO Keywords ([Desc]) VALUES(?)";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, keyword);
 			st.execute();
@@ -32,16 +32,14 @@ public class KeywordManagement implements LibraryConstants {
 		ArrayList<Keyword> list = new ArrayList<Keyword>();
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "SELECT * FROM Keywords WHERE Desc = " + keyword;
+			String sql = "SELECT * FROM Keywords WHERE Desc = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, keyword);
 			ResultSet rs = st.executeQuery();
-			while(rs.next()){
-				Keyword result = new Keyword(rs.getString("Desc"));
-				list.add(result);
-			}
-
-			return list.get(0);
+			rs.next();
+			Keyword result = new Keyword(rs.getString("Desc"));
+			result.setId(rs.getInt("ID"));
+			return result;
 
 		} catch(Exception e){
 			System.out.print(e);
@@ -53,7 +51,7 @@ public class KeywordManagement implements LibraryConstants {
 		ArrayList<Keyword> list = new ArrayList<Keyword>();
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "SELECT * FROM Keywords WHERE ID = " + id;
+			String sql = "SELECT * FROM Keywords WHERE ID = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();

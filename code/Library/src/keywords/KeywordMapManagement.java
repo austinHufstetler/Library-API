@@ -28,11 +28,23 @@ public class KeywordMapManagement {
 		}
 	}
 
+	public static void delete(int keywordId){
+		try{
+			Connection conn = Connect.getConnection();
+			String sql = "DELETE FROM KeywordMap WHERE KeywordId = ?";
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, keywordId);
+			st.execute();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	public static ArrayList<KeywordMap> search(int keywordId) {
 		ArrayList<KeywordMap> list = new ArrayList<KeywordMap>();
 		try{
 			Connection conn = Connect.getConnection();
-			String sql = "SELECT * FROM KeywordMap WHERE KeywordId = " + keywordId;
+			String sql = "SELECT * FROM KeywordMap WHERE KeywordId = ?";
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, keywordId);
 			ResultSet rs = st.executeQuery();
@@ -52,7 +64,7 @@ public class KeywordMapManagement {
 	public static ArrayList<Book> getBooksByKeyword(String keyword){
 		ArrayList<Book> result = new ArrayList<Book>();
 		Keyword key = KeywordManagement.searchByKeyword(keyword);
-		ArrayList<KeywordMap> list = KeywordMapManagement.search(key.getId());
+		ArrayList<KeywordMap> list = search(key.getId());
 		for(KeywordMap map : list){
 			result.add(BookManagement.getBook(map.getBookId()));
 		}

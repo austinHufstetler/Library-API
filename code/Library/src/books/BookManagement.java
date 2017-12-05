@@ -14,7 +14,7 @@ public class BookManagement implements LibraryConstants {
 	/////////////////////////
 	//SEARCH NEEDS TO BE REMOVED FROM THIS CLASS
 	////////////////////////
-	
+
 	Book book = new Book();
 
 	public BookManagement(Book book){
@@ -66,12 +66,12 @@ public class BookManagement implements LibraryConstants {
 			st.setString(8, b.getPin());
 			st.setString(9, b.getCost()+"");
 			st.executeUpdate();
-			
+
 		} catch(Exception e){
 			System.out.print(e);
-		} 	
+		}
 	} */
-	
+
 	public void update() {
 		try{
 			Connection conn = Connect.getConnection();
@@ -91,7 +91,7 @@ public class BookManagement implements LibraryConstants {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void delete() {
 		try{
 			Connection conn = Connect.getConnection();
@@ -101,9 +101,9 @@ public class BookManagement implements LibraryConstants {
 			st.executeUpdate();
 		} catch(Exception e){
 			e.printStackTrace();
-		} 	
+		}
 	}
-	
+
 	/*
 	public void delete(String param) {
 		try{
@@ -116,7 +116,7 @@ public class BookManagement implements LibraryConstants {
 			e.printStackTrace(System.out);
 		}
 	} */
-	
+
 	public static void deleteBook(int id){
 		try{
 			Connection conn = Connect.getConnection();
@@ -126,14 +126,14 @@ public class BookManagement implements LibraryConstants {
 			st.executeUpdate();
 		} catch(Exception e){
 			e.printStackTrace();
-		} 	
+		}
 	}
-	
+
 	public static Book getBook(int book_id){
 		try{
 			Connection conn = Connect.getConnection();
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM Books WHERE ID = ?");    
-			st.setString(1, book_id+"");    
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM Books WHERE ID = ?");
+			st.setString(1, book_id+"");
 			ResultSet rs = st.executeQuery();
 			rs.next();
 			Book b = new Book();
@@ -151,9 +151,9 @@ public class BookManagement implements LibraryConstants {
 		    } catch(Exception e){
 		    	e.printStackTrace(System.out);
 		    	return null;
-		    }		
+		    }
 	}
-	
+
 
 
 }
