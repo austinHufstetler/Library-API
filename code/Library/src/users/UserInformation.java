@@ -10,6 +10,7 @@ public class UserInformation {
 
 //this will be for getters, getting all info from users, method for each
 	
+	
 	public static boolean isSuspended(String username){
 		try{
 			Connection conn = Connect.getConnection();
@@ -25,7 +26,7 @@ public class UserInformation {
 		    	return false;
 		    }
 		
-	}
+	} 
 	
 	public static int getReasonSuspended(String username){
 		try{
