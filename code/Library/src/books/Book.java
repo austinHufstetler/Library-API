@@ -3,6 +3,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
 import common.LibraryConstants;
 import libraryexceptions.NonrenewableBookException;
 import common.*;
@@ -136,7 +138,7 @@ public class Book extends LibraryObject{
 		if(!UserInformation.isSuspended(m.getUsername())) {
 			try{
 				Connection conn = Connect.getConnection();
-				String sql = "INSERT INTO HoldMap (Book_Id, Order, PIN_Code) VALUES (?,?,?)";
+				String sql = "INSERT INTO HoldMap (Book_Id, Hold_Order, PIN_Code) VALUES (?,?,?)";
 				PreparedStatement st = conn.prepareStatement(sql);
 				st.setString(1, this.getId()+"");
 				st.setString(2, (this.getOrder() + 1) + "");
@@ -300,9 +302,6 @@ public class Book extends LibraryObject{
 	}
 	
 	
-	
-	
-	
 	public boolean isAvailableCheckout(){
 		try{
 			Connection conn = Connect.getConnection();
@@ -346,28 +345,36 @@ public class Book extends LibraryObject{
 		    }			
 	}
 	
-	//THIS IS NOT FINISHED, NEEDS TO DEAL WITH UPDATING WHEN 2 WEEKS IS UP (THEY RENEW ON DAY SUPPOSE TO RETURN (or do we deal with that here)?
 	public void requestRenewal(String pin){
-		if(!this.isNew()) {
+		Member m1 = UserManagement.getMemberByPin(pin);
+		ArrayList<Book> checkedOut = m1.getCheckedOutBooks();
+		Book b1 = BookManagement.getBook(this.getId());
+		if(!this.isNew() && this.getOrder() == 0 && checkedOut.contains(b1)) {
 			try{
 				Connection conn = Connect.getConnection();
-				String sql = "UPDATE Books SET Hold = ? WHERE ID= " + this.getId();
+				String sql = "INSERT INTO HoldMap (Book_Id, Hold_Order, PIN_Code) VALUES (?,?,?)";
 				PreparedStatement st = conn.prepareStatement(sql);
-				st.setString(1, pin);
+				st.setString(1, this.getId()+"");
+				st.setString(2, (this.getOrder() + 1) + "");
+				st.setString(3, pin);
 				st.executeUpdate();
 			} catch(Exception e){
 				e.printStackTrace(System.out);
 			} 	
 		}
 		else{
-			//System.out.println("This book is not available for renewal");
-			//throws some exception
+			try {
+				throw new NonrenewableBookException("This user cannot renew this book");
+			} catch (NonrenewableBookException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}		
 	}
 	
 	
-	public void renewBook(String pin) throws NonrenewableBookException{
-		if(!this.isNew()) {
+	public void renewBook(String pin){
+		if(!this.isNew() && this.getNextInLine().equals(pin)) {
 			try{
 				Connection conn = Connect.getConnection();
 				String sql = "UPDATE Books SET Pin_Code = ?, Hold = ?, DateStartCheckedOut = ? WHERE ID= " + this.getId();
@@ -378,10 +385,16 @@ public class Book extends LibraryObject{
 				st.executeUpdate();
 			} catch(Exception e){
 				e.printStackTrace(System.out);
+				
 			} 	
 		}
 		else{
-			throw new NonrenewableBookException("This user cannot renew this book");
+			try {
+				throw new NonrenewableBookException("This user cannot renew this book");
+			} catch (NonrenewableBookException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}		
 	} 
 	

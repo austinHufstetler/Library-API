@@ -17,7 +17,6 @@
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.sql.Statement"/>
-<fullyQualifiedTypeName name="common.LibraryConstants"/>
 <fullyQualifiedTypeName name="libraryexceptions.UnavailableUsernameException"/>
 <fullyQualifiedTypeName name="libraryutils.DuplicateChecker"/>
 <fullyQualifiedTypeName name="libraryexceptions.DuplicatePinException"/>
@@ -30,11 +29,14 @@
 <fullyQualifiedTypeName name="users.Authorization"/>
 <fullyQualifiedTypeName name="users.Member"/>
 <fullyQualifiedTypeName name="books.BookTools"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.awt.print.Book"/>
 <fullyQualifiedTypeName name="books.Book"/>
 <fullyQualifiedTypeName name="users.UserManagement"/>
 <fullyQualifiedTypeName name="users.Manager"/>
 <fullyQualifiedTypeName name="books.BookManagement"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="common.LibraryConstants"/>
+<fullyQualifiedTypeName name="users.UserInformation"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
